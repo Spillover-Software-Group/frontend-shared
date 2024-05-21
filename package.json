@@ -1,0 +1,49 @@
+{
+  "name": "@spillover/frontend-shared",
+  "version": "1.0.0",
+  "description": "Shared front-end code for Spillover projects",
+  "author": "Felipe Zavan <felipe@zavan.me>",
+  "license": "UNLICENSED",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "module": "./dist/frontend-shared.es.js",
+  "scripts": {
+    "start": "vite",
+    "fix": "standard --fix",
+    "build": "NODE_ENV=production vite build",
+    "//": "HACK: hack for React 16",
+    "postbuild": "sed -i '' -e 's/.useInsertionEffect/[\"useInsertion\"+\"Effect\"]/g' ./dist/frontend-shared.es.js"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-swc": "^3.6.0",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "standard": "^17.1.0",
+    "tailwindcss": "^3.4.3",
+    "vite": "^5.2.11"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.10.4",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@headlessui/react": "^2.0.3",
+    "@hookform/resolvers": "^3.4.2",
+    "apollo-upload-client": "^18.0.1",
+    "apollo3-cache-persist": "^0.15.0",
+    "graphql": "^16.8.1",
+    "luxon": "^3.4.4",
+    "react-hook-form": "^7.51.4",
+    "react-toastify": "^10.0.5",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "react": ">= 16",
+    "react-dom": ">= 16"
+  }
+}
