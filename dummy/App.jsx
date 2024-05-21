@@ -17,37 +17,39 @@ function App () {
   }
 
   return (
-    <SpilloverProvider mode='development' ownerId='dummy' senalysisBusinessId='dummy'>
-      <div className='sfs-container sfs-mx-auto sfs-flex sfs-flex-col sfs-gap-4'>
-        <form className='sfs-flex sfs-flex-col sfs-gap-4'>
-          <div style={{ height: '400px', textAlign: 'center' }}>
-            <img src={imageURL} alt='Image' className='sfs-h-full' />
-          </div>
+    <div className='sfs-container sfs-mx-auto sfs-flex sfs-flex-col sfs-gap-4'>
+      <form className='sfs-flex sfs-flex-col sfs-gap-4'>
+        <div style={{ height: '400px', textAlign: 'center' }}>
+          <img src={imageURL} alt='Image' className='sfs-h-full' />
+        </div>
 
-          <div className='sfs-bg-gray-100 sfs-rounded-md' style={{ padding: '10px' }}>
-            {comment}
-          </div>
+        <div className='sfs-bg-gray-100 sfs-rounded-md' style={{ padding: '10px' }}>
+          {comment}
+        </div>
 
-          <textarea style={{ height: '100px', width: '100%' }} {...register('text')} />
+        <textarea style={{ height: '100px', width: '100%' }} {...register('text')} />
+      </form>
 
-          <div className='sfs-flex sfs-flex-row sfs-justify-end' style={{ justifyContent: 'flex-end' }}>
-            <AITextHelpersButton
-              message={comment}
-              text={watch('text')}
-              onOptionSelected={onOptionSelected}
-            />
-          </div>
-
-          <div style={{ width: '250px' }}>
-            <AITextHelpers
-              message={comment}
-              text={watch('text')}
-              onOptionSelected={onOptionSelected}
-            />
-          </div>
-        </form>
+      <div className='sfs-flex sfs-flex-row sfs-justify-end' style={{ justifyContent: 'flex-end' }}>
+        <SpilloverProvider mode='development' ownerId='dummy' senalysisBusinessId='dummy'>
+          <AITextHelpersButton
+            message={comment}
+            text={watch('text')}
+            onOptionSelected={onOptionSelected}
+          />
+        </SpilloverProvider>
       </div>
-    </SpilloverProvider>
+
+      <div style={{ width: '250px' }}>
+        <SpilloverProvider mode='development' ownerId='dummy' senalysisBusinessId='dummy'>
+          <AITextHelpers
+            message={comment}
+            text={watch('text')}
+            onOptionSelected={onOptionSelected}
+          />
+        </SpilloverProvider>
+      </div>
+    </div>
   )
 }
 
