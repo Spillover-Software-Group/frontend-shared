@@ -9352,7 +9352,9 @@ function gw({ mode: t, onComplete: e }) {
     {
       ref: r,
       src: t === "development" ? Ms.ssoDevUrl : Ms.ssoUrl,
-      className: "sfs-w-full sfs-h-full sfs-border-0"
+      className: "sfs-border-0 sfs-w-0 sfs-h-0 sfs-absolute sfs-invisible",
+      width: 0,
+      height: 0
     }
   );
 }
@@ -18455,13 +18457,13 @@ const ey = Dt({}), t_ = () => wt(ey);
 function r_({ children: t, options: e = {} }) {
   return e.isProd = e.mode === "production", e.isDev = !e.isProd, /* @__PURE__ */ G.jsx(ey.Provider, { value: e, children: t });
 }
-function fS({ mode: t = "production", ownerId: e, senalysisBusinessId: r, children: n }) {
+function fS({ ownerId: t, senalysisBusinessId: e, children: r, mode: n = "production" }) {
   const i = {
-    mode: t,
-    senalysisBusinessId: r
+    mode: n,
+    senalysisBusinessId: e
   };
-  return /* @__PURE__ */ G.jsx(r_, { options: i, children: /* @__PURE__ */ G.jsx(bw, { mode: t, ownerId: e, children: /* @__PURE__ */ G.jsxs(Kk, { mode: t, children: [
-    n,
+  return /* @__PURE__ */ G.jsx(r_, { options: i, children: /* @__PURE__ */ G.jsx(bw, { mode: n, ownerId: t, children: /* @__PURE__ */ G.jsxs(Kk, { mode: n, children: [
+    r,
     /* @__PURE__ */ G.jsx(rc, {})
   ] }) }) });
 }
@@ -24380,7 +24382,7 @@ function YT({ onOptionSelected: t }) {
 }
 function nr({ type: t, text: e, onOptionSelected: r, loadingMsg: n, children: i, autoRun: a = !0, retry: s = !0, n: o = 1 }) {
   const [u, { generatedOptions: c, loading: l }] = jy(), f = () => {
-    e && u(t, e, { n: o });
+    e && e.trim().length > 0 && u(t, e, { n: o });
   };
   return $e(() => {
     a && f();

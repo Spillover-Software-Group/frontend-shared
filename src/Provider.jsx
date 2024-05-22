@@ -6,7 +6,7 @@ import { AuthProvider } from './hooks/useAuth'
 import { EngageProvider } from './hooks/useEngage'
 import { OptionsProvider } from './hooks/useOptions'
 
-function Provider ({ mode = 'production', ownerId, senalysisBusinessId, children }) {
+function Provider ({ ownerId, senalysisBusinessId, children, mode = 'production' }) {
   const options = {
     mode,
     senalysisBusinessId

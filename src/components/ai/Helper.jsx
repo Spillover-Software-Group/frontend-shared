@@ -9,7 +9,7 @@ function Helper ({ type, text, onOptionSelected, loadingMsg, children, autoRun =
   const [generateAIReply, { generatedOptions, loading }] = useGenerateAIReply()
 
   const run = () => {
-    if (text) {
+    if (text && text.trim().length > 0) {
       generateAIReply(type, text, { n })
     }
   }
