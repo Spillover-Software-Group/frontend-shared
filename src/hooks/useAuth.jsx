@@ -66,7 +66,9 @@ function SSOFrame ({ mode, onComplete }) {
     <iframe
       ref={iframeRef}
       src={mode === 'development' ? config.ssoDevUrl : config.ssoUrl}
-      className='sfs-w-full sfs-h-full sfs-border-0'
+      className='sfs-border-0 sfs-w-0 sfs-h-0 sfs-absolute sfs-invisible'
+      width={0}
+      height={0}
     />
   )
 }
