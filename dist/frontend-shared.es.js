@@ -24601,11 +24601,12 @@ const zy = [
     component: nS
   }
 ], sS = zy.map((t) => t.name);
-function oS({ message: t, text: e, onOptionSelected: r, tools: n = sS }) {
+function oS({ message: t, text: e, onOptionSelected: r, tools: n }) {
+  n ?? (n = sS);
   const i = zy.filter((a) => n.includes(a.name)).map((a) => /* @__PURE__ */ G.jsx(xy, { title: a.title, icon: a.icon, children: /* @__PURE__ */ G.jsx(a.component, { message: t, text: e, onOptionSelected: r }) }, a.name));
   return /* @__PURE__ */ G.jsx(Q2, { title: "AI Helpers", icon: "wand-magic-sparkles", children: i });
 }
-function hS({ message: t, text: e, onOptionSelected: r, className: n, children: i }) {
+function hS({ message: t, text: e, onOptionSelected: r, className: n, children: i, tools: a }) {
   return /* @__PURE__ */ G.jsxs(Ou, { children: [
     /* @__PURE__ */ G.jsx(Ou.Button, { className: `sfs-border-0 sfs-bg-transparent sfs-cursor-pointer focus:sfs-outline-none ${n || ""}`, title: "AI Helpers", children: i || /* @__PURE__ */ G.jsx(pi, { name: "wand-magic-sparkles", className: "sfs-text-gray-700", size: "lg" }) }),
     /* @__PURE__ */ G.jsx(
@@ -24620,6 +24621,7 @@ function hS({ message: t, text: e, onOptionSelected: r, className: n, children: 
         children: /* @__PURE__ */ G.jsx(Ou.Panel, { anchor: { to: "bottom end", gap: "10px" }, className: "sfs-absolute sfs-z-30 sfs-w-80 sfs-max-h-96 sfs-border sfs-border-gray-300 sfs-border-solid sfs-rounded-md sfs-shadow-sm sfs-bg-white sfs-overflow-y-auto sfs-right-4 sfs-mt-2", children: /* @__PURE__ */ G.jsx(
           oS,
           {
+            tools: a,
             message: t,
             text: e,
             onOptionSelected: r

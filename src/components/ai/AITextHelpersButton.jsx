@@ -3,7 +3,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { Icon } from '@/components/icons'
 import AITextHelpers from './AITextHelpers'
 
-function AITextHelpersButton ({ message, text, onOptionSelected, className, children }) {
+function AITextHelpersButton ({ message, text, onOptionSelected, className, children, tools }) {
   return (
     <Popover>
       <Popover.Button className={`sfs-border-0 sfs-bg-transparent sfs-cursor-pointer focus:sfs-outline-none ${className || ''}`} title='AI Helpers'>
@@ -19,6 +19,7 @@ function AITextHelpersButton ({ message, text, onOptionSelected, className, chil
       >
         <Popover.Panel anchor={{ to: 'bottom end', gap: '10px' }} className='sfs-absolute sfs-z-30 sfs-w-80 sfs-max-h-96 sfs-border sfs-border-gray-300 sfs-border-solid sfs-rounded-md sfs-shadow-sm sfs-bg-white sfs-overflow-y-auto sfs-right-4 sfs-mt-2'>
           <AITextHelpers
+            tools={tools}
             message={message}
             text={text}
             onOptionSelected={onOptionSelected}

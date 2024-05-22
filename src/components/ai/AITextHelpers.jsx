@@ -89,7 +89,9 @@ const SCREENS = [
 
 const TOOLS = SCREENS.map((screen) => screen.name)
 
-function AITextHelpers ({ message, text, onOptionSelected, tools = TOOLS }) {
+function AITextHelpers ({ message, text, onOptionSelected, tools }) {
+  tools ??= TOOLS
+
   const screens = SCREENS.filter((screen) => tools.includes(screen.name)).map((screen) => (
     <Screen key={screen.name} title={screen.title} icon={screen.icon}>
       <screen.component message={message} text={text} onOptionSelected={onOptionSelected} />
