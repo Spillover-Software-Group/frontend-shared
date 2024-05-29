@@ -11,7 +11,8 @@ const comment = 'Love the place!'
 function App () {
   const { register, watch } = useForm()
 
-  const onOptionSelected = (option) => {
+  const onOptionSelected = (option, type) => {
+    console.log(option, type)
     const textArea = document.querySelector('textarea')
     textArea.value = option
   }

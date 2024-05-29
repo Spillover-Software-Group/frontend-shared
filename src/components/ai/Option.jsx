@@ -1,6 +1,6 @@
-function Option ({ option, onClick }) {
+function Option ({ option, type, onClick }) {
   const handleClick = () => {
-    if (onClick) onClick(option)
+    if (onClick) onClick(option, type)
   }
 
   return (

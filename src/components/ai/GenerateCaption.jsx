@@ -49,7 +49,7 @@ function GenerateCaption ({ onOptionSelected }) {
           <div className='sfs-text-gray-700'>Pick an option or try again for new options</div>
 
           {options.map((option, index) => (
-            <Option key={index} option={option} onClick={onOptionSelected} />
+            <Option key={index} option={option} type='post_caption' onClick={onOptionSelected} />
           ))}
         </div>
       )}

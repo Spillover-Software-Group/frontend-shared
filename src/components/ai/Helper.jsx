@@ -43,7 +43,7 @@ function Helper ({ type, text, onOptionSelected, loadingMsg, children, autoRun =
           )}
 
       {generatedOptions?.map((option, index) => (
-        <Option key={index} option={option} onClick={onOptionSelected} />
+        <Option key={index} type={type} option={option} onClick={onOptionSelected} />
       ))}
     </div>
   )

@@ -24414,11 +24414,11 @@ const Uy = so(function({
     e
   ] });
 });
-function Wy({ option: t, onClick: e }) {
-  const r = () => {
-    e && e(t);
+function Wy({ option: t, type: e, onClick: r }) {
+  const n = () => {
+    r && r(t, e);
   };
-  return /* @__PURE__ */ G.jsx("div", { className: `sfs-p-3 sfs-bg-gray-100 sfs-rounded-md sfs-text-gray-600 hover:sfs-bg-gray-200 sfs-transition sfs-duration-200 sfs-text-sm ${e && "sfs-cursor-pointer"} sfs-whitespace-pre-line`, onClick: r, children: t });
+  return /* @__PURE__ */ G.jsx("div", { className: `sfs-p-3 sfs-bg-gray-100 sfs-rounded-md sfs-text-gray-600 hover:sfs-bg-gray-200 sfs-transition sfs-duration-200 sfs-text-sm ${r && "sfs-cursor-pointer"} sfs-whitespace-pre-line`, onClick: n, children: t });
 }
 const eS = QT({
   context: HT().min(5, "Please provide some more context")
@@ -24448,7 +24448,7 @@ function tS({ onOptionSelected: t }) {
     ),
     u.length > 0 && /* @__PURE__ */ G.jsxs("div", { className: "sfs-w-full sfs-flex sfs-flex-col sfs-gap-4 sfs-mt-4", children: [
       /* @__PURE__ */ G.jsx("div", { className: "sfs-text-gray-700", children: "Pick an option or try again for new options" }),
-      u.map((c, l) => /* @__PURE__ */ G.jsx(Wy, { option: c, onClick: t }, l))
+      u.map((c, l) => /* @__PURE__ */ G.jsx(Wy, { option: c, type: "post_caption", onClick: t }, l))
     ] })
   ] });
 }
@@ -24473,7 +24473,7 @@ function nr({ type: t, text: e, onOptionSelected: r, loadingMsg: n, children: i,
         children: "Retry"
       }
     ),
-    c == null ? void 0 : c.map((d, h) => /* @__PURE__ */ G.jsx(Wy, { option: d, onClick: r }, h))
+    c == null ? void 0 : c.map((d, h) => /* @__PURE__ */ G.jsx(Wy, { type: t, option: d, onClick: r }, h))
   ] });
 }
 function rS({ message: t }) {
@@ -24565,12 +24565,15 @@ function cS({ text: t, onOptionSelected: e }) {
   );
 }
 function lS({ text: t, onOptionSelected: e }) {
+  const r = (n, i) => {
+    e(`${t} ${n}`, i);
+  };
   return /* @__PURE__ */ G.jsx(
     nr,
     {
       type: "continue_writing",
       text: t,
-      onOptionSelected: e,
+      onOptionSelected: r,
       loadingMsg: "Continuing your text..."
     }
   );
