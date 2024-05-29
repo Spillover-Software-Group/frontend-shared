@@ -5,9 +5,10 @@ import useOptions from './useOptions'
 import { useEngageMutation } from './useEngage'
 
 const GENERATE_REPLY_MUTATION = gql`
-  mutation GenerateAIReply($senalysisBusinessId: String!, $message: String!, $type: String!, $n: Int) {
+  mutation GenerateAIReply($senalysisBusinessId: String, $spilloverBusinessId: String, $message: String!, $type: String!, $n: Int) {
     generateAiReply(input: {
       senalysisBusinessId: $senalysisBusinessId,
+      spilloverBusinessId: $spilloverBusinessId,
       message: $message,
       type: $type,
       n: $n
@@ -20,7 +21,7 @@ const GENERATE_REPLY_MUTATION = gql`
   }
 `
 function useGenerateAIReply () {
-  const { senalysisBusinessId } = useOptions()
+  const { senalysisBusinessId, spilloverBusinessId } = useOptions()
 
   const [generateAIReply, status] = useEngageMutation(GENERATE_REPLY_MUTATION)
 
@@ -33,6 +34,7 @@ function useGenerateAIReply () {
           type,
           message,
           senalysisBusinessId,
+          spilloverBusinessId,
           n: options.n
         }
       })

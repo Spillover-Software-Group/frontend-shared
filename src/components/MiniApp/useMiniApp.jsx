@@ -14,13 +14,13 @@ function useMiniApp () {
   return context
 }
 
-function MiniAppProvider ({ children }) {
+function MiniAppProvider ({ onCloseButtonClick, children }) {
   const [currentScreen, setCurrentScreen] = useState(null)
 
   const goHome = () => setCurrentScreen(null)
 
   return (
-    <MiniAppContext.Provider value={{ currentScreen, setCurrentScreen, goHome }}>
+    <MiniAppContext.Provider value={{ currentScreen, setCurrentScreen, goHome, onCloseButtonClick }}>
       {children}
     </MiniAppContext.Provider>
   )

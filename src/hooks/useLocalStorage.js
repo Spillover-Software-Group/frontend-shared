@@ -7,17 +7,36 @@ import useEventListener from './useEventListener'
 // SEE: https://github.com/apollographql/apollo-cache-persist/blob/v0.13.0/src/storageWrappers/LocalStorageWrapper.ts#L19
 const storage = new LocalStorageWrapper(window.localStorage)
 
-function useLocalStorage (key, initialValue, options = { sync: false }) {
-  const [storedValue, setStoredValue] = useState(() => {
-    try {
-      const item = storage.getItem(key)
+function getStoredValue (key) {
+  try {
+    const item = storage.getItem(key)
 
-      return item ? JSON.parse(item) : initialValue
-    } catch (error) {
-      console.error(error)
-      return initialValue
-    }
-  })
+    return item ? JSON.parse(item) : null
+  } catch (error) {
+    console.error(error)
+    return null
+  }
+}
+
+function storeValue (key, value) {
+  try {
+    // Allow value to be a function so we have same API as useState.
+    const valueToStore =
+      value instanceof Function ? value(getStoredValue(key)) : value
+
+    storage.setItem(
+      key,
+      valueToStore !== null ? JSON.stringify(valueToStore) : null
+    )
+  } catch (error) {
+    console.error(error)
+  }
+
+  return value
+}
+
+function useLocalStorage (key, initialValue, options = { sync: false }) {
+  const [storedValue, setStoredValue] = useState(() => getStoredValue(key) || initialValue)
 
   const handleStorageEvent = useCallback(
     (e) => {
@@ -32,24 +51,10 @@ function useLocalStorage (key, initialValue, options = { sync: false }) {
 
   useEventListener('storage', handleStorageEvent)
 
-  const setValue = (value) => {
-    try {
-      // Allow value to be a function so we have same API as useState.
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value
-
-      setStoredValue(valueToStore)
-
-      storage.setItem(
-        key,
-        valueToStore !== null ? JSON.stringify(valueToStore) : null
-      )
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  const setValue = (value) => setStoredValue(storeValue(key, value))
 
   return [storedValue, setValue]
 }
 
 export default useLocalStorage
+export { storage, getStoredValue, storeValue }

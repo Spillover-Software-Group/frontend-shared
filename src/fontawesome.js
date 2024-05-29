@@ -17,7 +17,8 @@ import {
   faSpinner,
   faStar,
   faUserTie,
-  faWandMagicSparkles
+  faWandMagicSparkles,
+  faXmark
 } from '@fortawesome/free-solid-svg-icons'
 
 // import {
@@ -40,5 +41,6 @@ library.add(
   faSpinner,
   faStar,
   faUserTie,
-  faWandMagicSparkles
+  faWandMagicSparkles,
+  faXmark
 )

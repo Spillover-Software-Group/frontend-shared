@@ -2,7 +2,7 @@ import { Icon } from '@/components/icons'
 import { useMiniApp } from './useMiniApp'
 
 function Header ({ title, icon, noBack }) {
-  const { goHome } = useMiniApp()
+  const { goHome, onCloseButtonClick } = useMiniApp()
 
   return (
     <header className='sfs-w-full sfs-box-border sfs-flex sfs-flex-row sfs-items-center'>
@@ -16,6 +16,12 @@ function Header ({ title, icon, noBack }) {
         <Icon icon={icon} />
         <p className='sfs-m-0 sfs-font-semibold'>{title}</p>
       </div>
+
+      {onCloseButtonClick && (
+        <div onClick={onCloseButtonClick} className='sfs-h-10 sfs-px-4 sfs-flex sfs-flex-row sfs-items-center sfs-cursor-pointer hover:sfs-bg-gray-200 sfs-transition sfs-duration-200'>
+          <Icon icon='xmark' />
+        </div>
+      )}
     </header>
   )
 }

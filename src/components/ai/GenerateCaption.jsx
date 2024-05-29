@@ -29,7 +29,7 @@ function GenerateCaption ({ onOptionSelected }) {
       <div className='sfs-w-full sfs-flex sfs-flex-col sfs-gap-1'>
         <label className='sfs-text-sm sfs-text-gray-700'>Give us some context...</label>
         <div className='sfs-w-full sfs-flex sfs-flex-col sfs-gap-4'>
-          <textarea className='sfs-box-border sfs-w-full sfs-h-20 sfs-border sfs-border-gray-300 sfs-rounded-md sfs-p-2' {...register('context')} />
+          <textarea className='sfs-box-border sfs-w-full sfs-h-20 sfs-border sfs-border-gray-300 sfs-rounded-md sfs-p-2' {...register('context')} autoFocus />
         </div>
         {errors.context && <div className='sfs-text-red-500 sfs-text-sm'>{errors.context.message}</div>}
       </div>

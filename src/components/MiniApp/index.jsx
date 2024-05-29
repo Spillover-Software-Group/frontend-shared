@@ -2,9 +2,9 @@ import { MiniAppProvider } from './useMiniApp'
 import Screens from './Screens'
 import Screen from './Screen'
 
-function MiniApp ({ title, icon, children }) {
+function MiniApp ({ title, icon, children, onCloseButtonClick }) {
   return (
-    <MiniAppProvider>
+    <MiniAppProvider onCloseButtonClick={onCloseButtonClick}>
       <Screens title={title} icon={icon}>
         {children}
       </Screens>

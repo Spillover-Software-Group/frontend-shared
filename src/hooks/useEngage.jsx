@@ -1,22 +1,23 @@
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client/core'
+import { ApolloClient, ApolloLink, InMemoryCache, Observable } from '@apollo/client/core'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { useMutation } from '@apollo/client/react'
 
-import useAuth from './useAuth'
+import { getAccessToken, refreshAccessToken } from './useAuth'
 import config from '@/config'
 
 const cache = new InMemoryCache()
 
-async function setupClient ({ mode, accessToken, reauth }) {
+async function setupClient ({ mode, ownerId }) {
   const uri = mode === 'development' ? config.engageGraphqlDevEndpoint : config.engageGraphqlEndpoint
 
   // This replaces `createHttpLink` to allow multipart (file upload) requests.
   const httpLink = createUploadLink({ uri })
 
   const authLink = setContext((_, { headers }) => {
+    const accessToken = getAccessToken({ ownerId })
     const authorization = accessToken ? `Accounts ${accessToken}` : ''
 
     return {
@@ -27,12 +28,37 @@ async function setupClient ({ mode, accessToken, reauth }) {
     }
   })
 
-  // Re-authenticate on auth errors.
-  const errorLink = onError(({ networkError }) => {
+  const errorLink = onError(({ networkError, operation, forward }) => {
     if (!networkError) return
 
-    console.error(networkError)
-    if (networkError.statusCode === 401) reauth()
+    // Re-authenticate on auth errors.
+    if (networkError.statusCode === 401) {
+      console.log('Re-authenticating...')
+
+      // The onError callback can't be async/return a promise,
+      // it must return an Observable.
+      // SEE: https://github.com/apollographql/apollo-link/issues/646
+      return new Observable((observer) => {
+        refreshAccessToken({ mode, ownerId })
+          .then((newToken) => {
+            operation.setContext(({ headers }) => ({
+              headers: {
+                ...headers,
+                authorization: newToken ? `Accounts ${newToken}` : ''
+              }
+            }))
+
+            const subscriber = {
+              next: observer.next.bind(observer),
+              error: observer.error.bind(observer),
+              complete: observer.complete.bind(observer)
+            }
+
+            forward(operation).subscribe(subscriber)
+          })
+          .catch(observer.error.bind(observer))
+      })
+    }
   })
 
   const client = new ApolloClient({
@@ -47,20 +73,16 @@ const EngageContext = createContext({
   apolloClient: null
 })
 
-function EngageProvider ({ children, mode }) {
-  const { isAuthenticated, accessToken, reauth } = useAuth()
-
-  if (!isAuthenticated) return <h2>Not authenticated. Try refreshing the page.</h2>
-
+function EngageProvider ({ children, mode, ownerId }) {
   const [client, setClient] = useState(null)
 
   useEffect(() => {
     async function init () {
-      setClient(await setupClient({ mode, accessToken, reauth }))
+      setClient(await setupClient({ mode, ownerId }))
     }
 
     init().catch(console.error)
-  }, [mode, accessToken])
+  }, [mode, ownerId])
 
   if (!client) return <h2>Initializing...</h2>
 

@@ -89,7 +89,7 @@ const SCREENS = [
 
 const TOOLS = SCREENS.map((screen) => screen.name)
 
-function AITextHelpers ({ message, text, onOptionSelected, tools }) {
+function AITextHelpers ({ message, text, onOptionSelected, onCloseButtonClick, tools }) {
   tools ??= TOOLS
 
   const screens = SCREENS.filter((screen) => tools.includes(screen.name)).map((screen) => (
@@ -99,7 +99,7 @@ function AITextHelpers ({ message, text, onOptionSelected, tools }) {
   ))
 
   return (
-    <MiniApp title='AI Helpers' icon='wand-magic-sparkles'>
+    <MiniApp title='AI Helpers' icon='wand-magic-sparkles' onCloseButtonClick={onCloseButtonClick}>
       {screens}
     </MiniApp>
   )

@@ -31,7 +31,7 @@ function App () {
       </form>
 
       <div className='sfs-flex sfs-flex-row sfs-justify-end' style={{ justifyContent: 'flex-end' }}>
-        <SpilloverProvider mode='development' ownerId='dummy' senalysisBusinessId='dummy'>
+        <SpilloverProvider mode='development' ownerId='dummy' spilloverBusinessId='dummy'>
           <AITextHelpersButton
             message={comment}
             text={watch('text')}
@@ -41,7 +41,7 @@ function App () {
       </div>
 
       <div style={{ width: '250px' }}>
-        <SpilloverProvider mode='development' ownerId='dummy' senalysisBusinessId='dummy'>
+        <SpilloverProvider mode='development' ownerId='dummy' spilloverBusinessId='dummy'>
           <AITextHelpers
             message={comment}
             text={watch('text')}
