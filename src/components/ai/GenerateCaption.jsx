@@ -35,11 +35,11 @@ function GenerateCaption ({ onOptionSelected }) {
       </div>
 
       <Button
-        type='submit'
         disabled={loading}
         context='primary'
         icon='wand-magic-sparkles'
         loading={loading}
+        onClick={handleSubmit(onSubmit)}
       >
         Generate Caption
       </Button>

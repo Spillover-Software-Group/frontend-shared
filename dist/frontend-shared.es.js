@@ -24438,11 +24438,11 @@ function tS({ onOptionSelected: t }) {
     /* @__PURE__ */ G.jsx(
       Uy,
       {
-        type: "submit",
         disabled: n,
         context: "primary",
         icon: "wand-magic-sparkles",
         loading: n,
+        onClick: a(o),
         children: "Generate Caption"
       }
     ),
