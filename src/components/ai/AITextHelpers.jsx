@@ -1,4 +1,5 @@
 import { MiniApp, Screen } from '@/components/MiniApp'
+import GenerateText from './GenerateText'
 import GenerateCaption from './GenerateCaption'
 import Translate from './Translate'
 import SpellCheck from './SpellCheck'
@@ -13,6 +14,12 @@ import GenerateReviewReply from './GenerateReviewReply'
 import GenerateCommentReply from './GenerateCommentReply'
 
 const SCREENS = [
+  {
+    name: 'GenerateText',
+    title: 'Generate Text',
+    icon: 'file-text',
+    component: GenerateText
+  },
   {
     name: 'GenerateCaption',
     title: 'Generate Caption',
