@@ -4,9 +4,10 @@ import { ToastContainer } from 'react-toastify'
 
 import { AuthProvider } from './hooks/useAuth'
 import { EngageProvider } from './hooks/useEngage'
+import { AccountsProvider } from './hooks/useAccounts'
 import { OptionsProvider } from './hooks/useOptions'
 
-function Provider ({ ownerId, senalysisBusinessId, spilloverBusinessId, children, mode = 'production' }) {
+function Provider({ ownerId, senalysisBusinessId, spilloverBusinessId, children, mode = 'production' }) {
   const options = {
     mode,
     ownerId,
@@ -17,11 +18,14 @@ function Provider ({ ownerId, senalysisBusinessId, spilloverBusinessId, children
   return (
     <OptionsProvider options={options}>
       <AuthProvider mode={mode} ownerId={ownerId}>
-        <EngageProvider mode={mode} ownerId={ownerId}>
-          {children}
-
-          <ToastContainer />
-        </EngageProvider>
+        <AccountsProvider mode={mode} ownerId={ownerId}>
+          <EngageProvider mode={mode} ownerId={ownerId}>
+            <div className='sfs-isolate sfs-h-full'>
+              {children}
+              <ToastContainer />
+            </div>
+          </EngageProvider>
+        </AccountsProvider>
       </AuthProvider>
     </OptionsProvider>
   )

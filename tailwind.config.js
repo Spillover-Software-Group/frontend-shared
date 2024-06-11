@@ -1,5 +1,10 @@
 const { fontFamily } = require('tailwindcss/defaultTheme')
 
+const {
+  scopedPreflightStyles,
+  isolateInsideOfContainer
+} = require('tailwindcss-scoped-preflight')
+
 module.exports = {
   darkMode: ['class'],
   content: [
@@ -8,7 +13,7 @@ module.exports = {
   ],
   prefix: 'sfs-',
   corePlugins: {
-    preflight: false
+    // preflight: false
   },
   theme: {
     container: {
@@ -97,5 +102,10 @@ module.exports = {
       }
     }
   },
-  plugins: [require('tailwindcss-animate')]
+  plugins: [
+    scopedPreflightStyles({
+      isolationStrategy: isolateInsideOfContainer('.sfs-isolate')
+    }),
+    require('tailwindcss-animate')
+  ]
 }

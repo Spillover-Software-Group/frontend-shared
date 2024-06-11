@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { SpilloverProvider, AITextHelpersButton, AITextHelpers, CustomerReport } from '../src'
 
 import './main.css'
-import { AccountsProvider } from '../src/hooks/useAccounts'
 
 const imageURL = 'https://senalysis-media-uploads.s3.us-east-2.amazonaws.com/uploads/media/664262db125beab7f3fb5631.jpg'
 
@@ -57,17 +56,17 @@ const comment = 'Love the place!'
 
 function App() {
   return (
-    <AccountsProvider mode='development'>
+    <SpilloverProvider mode='development'>
       <div style={{ height: '100%', width: '100%' }}>
         <CustomerReport
           showBusinessSelector
-          businessId='Z2lkOi8vYWNjb3VudHMvQnVzaW5lc3MvNzg'
-          locationId={null}
-          startDate='2024-06-01'
-          endDate='2024-06-05'
+        // businessId='Z2lkOi8vYWNjb3VudHMvQnVzaW5lc3MvNzg'
+        // locationId={null}
+        // startDate='2024-06-01'
+        // endDate='2024-06-05'
         />
       </div>
-    </AccountsProvider>
+    </SpilloverProvider>
   )
 }
 

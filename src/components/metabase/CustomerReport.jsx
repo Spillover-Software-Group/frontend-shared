@@ -30,7 +30,7 @@ import {
   DateRangePickerButton
 } from '@/components/ui/date-picker'
 
-function CustomerReport ({
+function CustomerReport({
   defaultBusinessId = null,
   defaultLocationId = null,
   showBusinessSelector = false
@@ -58,8 +58,8 @@ function CustomerReport ({
   console.log('dateRange', dateRange.start.toString(), dateRange.end.toString())
 
   const { reportsEmbedURL } = useReports({
-    businessId: 'Z2lkOi8vYWNjb3VudHMvQnVzaW5lc3MvNzg',
-    locationId: null,
+    businessId: selectedBusiness?.id || defaultBusinessId,
+    locationId: selectedLocation?.id,
     startDate: dateRange.start.toString(),
     endDate: dateRange.end.toString()
   })
