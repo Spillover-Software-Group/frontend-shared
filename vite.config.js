@@ -32,7 +32,7 @@ export default defineConfig({
       fileName: () => 'frontend-shared.es.js'
     },
     rollupOptions: {
-      external: ['react', 'react-dom']
+      external: ['react', 'react-dom', 'react/jsx-runtime']
     }
   }
 })

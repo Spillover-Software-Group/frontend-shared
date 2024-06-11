@@ -2,9 +2,11 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import {
+  faCheck,
   faChevronLeft,
   faCircleMinus,
   faCirclePlus,
+  faDownload,
   faEllipsis,
   faFaceSmileBeam,
   faFeather,
@@ -13,6 +15,7 @@ import {
   faList,
   faReply,
   faRotate,
+  faSort,
   faSpellCheck,
   faSpinner,
   faStar,
@@ -26,9 +29,11 @@ import {
 
 library.add(
   // Solid
+  faCheck,
   faChevronLeft,
   faCircleMinus,
   faCirclePlus,
+  faDownload,
   faEllipsis,
   faFaceSmileBeam,
   faFeather,
@@ -37,6 +42,7 @@ library.add(
   faList,
   faReply,
   faRotate,
+  faSort,
   faSpellCheck,
   faSpinner,
   faStar,

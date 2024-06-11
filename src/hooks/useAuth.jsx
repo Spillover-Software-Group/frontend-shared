@@ -1,5 +1,5 @@
 import { useContext, createContext } from 'react'
-import { DateTime } from 'luxon'
+import { addSeconds, formatISO, parseISO } from 'date-fns'
 import { toast } from 'react-toastify'
 
 import config from '@/config'
@@ -15,7 +15,7 @@ class TokenData {
   static fromOAuthResponse (data, ownerId) {
     return new TokenData({
       accessToken: data.access_token,
-      expiresAt: DateTime.now().plus({ seconds: data.expires_in }),
+      expiresAt: addSeconds(new Date(), data.expires_in),
       ownerId
     })
   }
@@ -23,24 +23,24 @@ class TokenData {
   static fromStored (data) {
     return new TokenData({
       ...data,
-      expiresAt: DateTime.fromISO(data.expiresAt)
+      expiresAt: parseISO(data.expiresAt)
     })
   }
 
   get dataForStorage () {
     return {
       accessToken: this.accessToken,
-      expiresAt: this.expiresAt.toISO(),
+      expiresAt: formatISO(this.expiresAt),
       ownerId: this.ownerId
     }
   }
 
   get expiresIn () {
-    return this.expiresAt.diffNow()
+    return this.expiresAt - new Date()
   }
 
   get isExpired () {
-    return this.expiresIn.as('milliseconds') <= 0
+    return this.expiresIn <= 0
   }
 
   get isValid () {

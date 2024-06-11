@@ -1,7 +1,7 @@
 import { Icon } from '@/components/icons'
 import { useMiniApp } from './useMiniApp'
 
-function Header ({ title, icon, noBack }) {
+function Header({ title, icon, noBack }) {
   const { goHome, onCloseButtonClick } = useMiniApp()
 
   return (
@@ -12,7 +12,7 @@ function Header ({ title, icon, noBack }) {
         </div>
       )}
 
-      <div className='sfs-flex sfs-flex-grow sfs-justify-center sfs-gap-1 sfs-py-3 sfs-text-gray-800'>
+      <div className='sfs-flex sfs-grow sfs-justify-center sfs-gap-1 sfs-py-3 sfs-text-gray-800'>
         <Icon icon={icon} />
         <p className='sfs-m-0 sfs-font-semibold'>{title}</p>
       </div>
