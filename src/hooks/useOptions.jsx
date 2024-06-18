@@ -1,15 +1,15 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext } from "react";
 
-const context = createContext({})
+const context = createContext({});
 
-const useOptions = () => useContext(context)
+const useOptions = () => useContext(context);
 
-function OptionsProvider ({ children, options = {} }) {
-  options.isProd = options.mode === 'production'
-  options.isDev = !options.isProd
+function OptionsProvider({ children, options = {} }) {
+  options.isProd = options.mode === "production";
+  options.isDev = !options.isProd;
 
-  return <context.Provider value={options}>{children}</context.Provider>
+  return <context.Provider value={options}>{children}</context.Provider>;
 }
 
-export default useOptions
-export { OptionsProvider }
+export default useOptions;
+export { OptionsProvider };

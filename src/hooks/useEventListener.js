@@ -14,7 +14,7 @@ function useEventListener (eventName, handler, element = window) {
 
   useEffect(
     () => {
-      const isSupported = element && element.addEventListener
+      const isSupported = element?.addEventListener
       if (!isSupported) return
 
       // Create event listener that calls the handler function stored in ref.

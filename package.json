@@ -1,62 +1,62 @@
 {
   "name": "@spillover/frontend-shared",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Shared front-end code for Spillover projects",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npm run storybook",
+    "build": "vite build",
+    "storybook": "storybook dev -p 1234",
+    "build-storybook": "storybook build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spillover-Software-Group/frontend-shared.git"
+  },
   "author": "Felipe Zavan <felipe@zavan.me>",
   "license": "UNLICENSED",
-  "private": true,
-  "files": [
-    "dist"
-  ],
-  "type": "module",
-  "module": "./dist/frontend-shared.es.js",
-  "scripts": {
-    "start": "vite",
-    "fix": "standard --fix",
-    "build": "NODE_ENV=production vite build",
-    "//": "HACK: hack for React 17",
-    "postbuild": "sed -i '' -e 's/.useInsertionEffect/[\"useInsertion\"+\"Effect\"]/g' ./dist/frontend-shared.es.js"
+  "bugs": {
+    "url": "https://github.com/Spillover-Software-Group/frontend-shared/issues"
   },
+  "homepage": "https://github.com/Spillover-Software-Group/frontend-shared#readme",
   "devDependencies": {
+    "@biomejs/biome": "1.8.1",
+    "@storybook/addon-essentials": "^8.1.10",
+    "@storybook/addon-interactions": "^8.1.10",
+    "@storybook/addon-links": "^8.1.10",
+    "@storybook/addon-themes": "^8.1.10",
+    "@storybook/blocks": "^8.1.10",
+    "@storybook/react": "^8.1.10",
+    "@storybook/react-vite": "^8.1.10",
+    "@storybook/test": "^8.1.10",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
-    "standard": "^17.1.0",
-    "tailwindcss": "^3.4.3",
-    "vite": "^5.2.12"
+    "storybook": "^8.1.10",
+    "tailwindcss": "^3.4.4",
+    "tailwindcss-react-aria-components": "^1.1.3",
+    "vite": "^5.3.1"
+  },
+  "peerDependencies": {
+    "react": ">= 17",
+    "react-dom": ">= 17"
   },
   "dependencies": {
-    "@apollo/client": "^3.10.4",
-    "@fortawesome/fontawesome-svg-core": "^6.5.2",
-    "@fortawesome/free-brands-svg-icons": "^6.5.2",
-    "@fortawesome/free-regular-svg-icons": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/react-fontawesome": "^0.2.2",
-    "@headlessui/react": "^1.7.19",
-    "@hookform/resolvers": "^3.5.0",
+    "@apollo/client": "^3.10.5",
+    "@hookform/resolvers": "^3.6.0",
     "@internationalized/date": "^3.5.4",
     "apollo-upload-client": "^18.0.1",
     "apollo3-cache-persist": "^0.15.0",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
-    "graphql": "^16.8.1",
-    "lucide-react": "^0.394.0",
+    "graphql": "^16.8.2",
+    "lucide-react": "^0.395.0",
     "react-aria-components": "^1.2.1",
-    "react-hook-form": "^7.51.5",
-    "react-toastify": "^9.1.3",
-    "tailwind-merge": "^2.3.0",
+    "react-hook-form": "^7.52.0",
+    "react-toastify": "^10.0.5",
+    "tailwind-variants": "^0.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "tailwindcss-scoped-preflight": "^3.2.6",
+    "tailwindcss-scoped-preflight": "^3.2.8",
     "zod": "^3.23.8"
-  },
-  "peerDependencies": {
-    "react": ">= 16",
-    "react-dom": ">= 16"
-  },
-  "standard": {
-    "ignore": [
-      "dist/*"
-    ]
   }
 }
