@@ -8,7 +8,7 @@ import {
 } from "@apollo/client/core";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
-import { useMutation } from "@apollo/client/react";
+import { useQuery, useMutation } from "@apollo/client/react";
 
 import { getAccessToken, refreshAccessToken } from "@/hooks/useAuth";
 import config from "@/config";
@@ -18,19 +18,20 @@ const cache = new InMemoryCache();
 async function setupClient({ mode, ownerId }) {
   const uri =
     mode === "development"
-      ? config.engageGraphqlDevEndpoint
-      : config.engageGraphqlEndpoint;
+      ? config.accountsGraphqlDevEndpoint
+      : config.accountsGraphqlEndpoint;
 
   // This replaces `createHttpLink` to allow multipart (file upload) requests.
   const httpLink = createUploadLink({ uri });
 
   const authLink = setContext((_, { headers }) => {
     const accessToken = getAccessToken({ ownerId });
-    const authorization = accessToken ? `Accounts ${accessToken}` : "";
+    const authorization = accessToken ? `Bearer ${accessToken}` : "";
 
     return {
       headers: {
         ...headers,
+        accept: "application/json", // Necessary to get a 401 instead of a redirect on auth errors.
         authorization,
       },
     };
@@ -77,11 +78,11 @@ async function setupClient({ mode, ownerId }) {
   return client;
 }
 
-const EngageContext = createContext({
+const AccountsContext = createContext({
   apolloClient: null,
 });
 
-function EngageProvider({ children, mode, ownerId }) {
+function AccountsProvider({ children, mode, ownerId }) {
   const [client, setClient] = useState(null);
 
   useEffect(() => {
@@ -95,25 +96,30 @@ function EngageProvider({ children, mode, ownerId }) {
   if (!client) return <h2>Initializing...</h2>;
 
   return (
-    <EngageContext.Provider value={{ client }}>
+    <AccountsContext.Provider value={{ client }}>
       {children}
-    </EngageContext.Provider>
+    </AccountsContext.Provider>
   );
 }
 
-function useEngage() {
-  const context = useContext(EngageContext);
+function useAccounts() {
+  const context = useContext(AccountsContext);
 
   if (!context) {
-    throw new Error("useEngage must be used within an EngageProvider");
+    throw new Error("useAccounts must be used within an AccountsProvider");
   }
 
   return context;
 }
 
-function useEngageMutation(mutation, options = {}) {
-  const { client } = useEngage();
+function useAccountsMutation(mutation, options = {}) {
+  const { client } = useAccounts();
   return useMutation(mutation, { ...options, client });
 }
 
-export { EngageProvider, useEngage, useEngageMutation };
+function useAccountsQuery(query, options = {}) {
+  const { client } = useAccounts();
+  return useQuery(query, { ...options, client });
+}
+
+export { AccountsProvider, useAccounts, useAccountsQuery, useAccountsMutation };

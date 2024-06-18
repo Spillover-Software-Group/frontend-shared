@@ -1,8 +1,8 @@
-import path from 'path'
-import { fileURLToPath, URL } from 'url'
+import path from 'node:path'
+import { URL, fileURLToPath } from 'node:url'
 
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite'
 
 function fullPath (relPath) {
   return fileURLToPath(new URL(relPath, import.meta.url))
@@ -11,10 +11,6 @@ function fullPath (relPath) {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  server: {
-    host: true,
-    port: 1234
-  },
   resolve: {
     alias: {
       // So modules can be imported relative to src instead of ../../../...
@@ -32,7 +28,7 @@ export default defineConfig({
       fileName: () => 'frontend-shared.es.js'
     },
     rollupOptions: {
-      external: ['react', 'react-dom']
+      external: ['react', 'react-dom', 'react/jsx-runtime']
     }
   }
 })

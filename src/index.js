@@ -1,7 +1,8 @@
-import './styles.css'
-import './fontawesome'
+import Provider from './Provider';
+import { AITextHelpers} from "./ai/AITextHelpers";
+import { AITextHelpersButton } from "./ai/AITextHelpersButton";
+import { CustomerReports } from "./pages/CustomerReports";
 
-import SpilloverProvider from './Provider'
-import { AITextHelpersButton, AITextHelpers } from './components/ai'
+import './styles.css';
 
-export { SpilloverProvider, AITextHelpersButton, AITextHelpers }
+export { Provider as SpilloverProvider, AITextHelpers, AITextHelpersButton, CustomerReports };
