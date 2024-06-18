@@ -1,9 +1,13 @@
 {
   "name": "@spillover/frontend-shared",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Shared front-end code for Spillover projects",
   "private": true,
   "type": "module",
+  "module": "./dist/frontend-shared.es.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "npm run storybook",
     "build": "vite build",
