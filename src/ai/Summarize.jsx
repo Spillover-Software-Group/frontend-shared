@@ -1,14 +1,14 @@
-import Helper from './Helper'
+import Helper from "./Helper";
 
-function Summarize ({ message }) {
+function Summarize({ message }) {
   return (
     <Helper
-      type='summarize'
+      type="summarize"
       text={message}
-      loadingMsg='Summarizing...'
+      loadingMsg="Summarizing..."
       retry={false}
     />
-  )
+  );
 }
 
-export default Summarize
+export default Summarize;

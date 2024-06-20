@@ -1,5 +1,5 @@
-import { Form as RACForm } from "react-aria-components"
-import { twMerge } from "tailwind-merge"
+import { Form as RACForm } from "react-aria-components";
+import { twMerge } from "tailwind-merge";
 
 export function Form(props) {
   return (
@@ -7,5 +7,5 @@ export function Form(props) {
       {...props}
       className={twMerge("flex flex-col gap-4", props.className)}
     />
-  )
+  );
 }

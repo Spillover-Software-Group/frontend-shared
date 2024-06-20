@@ -1,20 +1,20 @@
-import { HelpCircle } from "lucide-react"
-import { DialogTrigger, Heading } from "react-aria-components"
+import { HelpCircle } from "lucide-react";
+import { DialogTrigger, Heading } from "react-aria-components";
 
-import { Button } from "./Button"
-import { Dialog } from "./Dialog"
-import { Popover } from "./Popover"
+import { Button } from "./Button";
+import { Dialog } from "./Dialog";
+import { Popover } from "./Popover";
 
 const meta = {
   component: Popover,
   args: {
-    showArrow: true
-  }
-}
+    showArrow: true,
+  },
+};
 
-export default meta
+export default meta;
 
-export const Example = args => (
+export const Example = (args) => (
   <DialogTrigger>
     <Button variant="icon" aria-label="Help">
       <HelpCircle className="w-4 h-4" />
@@ -30,4 +30,4 @@ export const Example = args => (
       </Dialog>
     </Popover>
   </DialogTrigger>
-)
+);

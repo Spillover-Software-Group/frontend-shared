@@ -1,15 +1,15 @@
-import Helper from './Helper'
+import Helper from "./Helper";
 
-function GenerateReviewReply ({ message, onOptionSelected }) {
+function GenerateReviewReply({ message, onOptionSelected }) {
   return (
     <Helper
-      type='review_reply'
+      type="review_reply"
       text={message}
       onOptionSelected={onOptionSelected}
-      loadingMsg='Generating reply...'
+      loadingMsg="Generating reply..."
       n={3}
     />
-  )
+  );
 }
 
-export default GenerateReviewReply
+export default GenerateReviewReply;

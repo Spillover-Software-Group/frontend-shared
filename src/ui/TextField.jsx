@@ -1,24 +1,24 @@
-import { TextField as AriaTextField } from "react-aria-components"
-import { tv } from "tailwind-variants"
+import { TextField as AriaTextField } from "react-aria-components";
+import { tv } from "tailwind-variants";
 
 import {
   Description,
   FieldError,
   Input,
   Label,
-  fieldBorderStyles
-} from "./Field"
+  fieldBorderStyles,
+} from "./Field";
 
-import { composeTailwindRenderProps, focusRing } from "@/utils"
+import { composeTailwindRenderProps, focusRing } from "@/utils";
 
 const inputStyles = tv({
   extend: focusRing,
   base: "border-2 rounded-md",
   variants: {
     isFocused: fieldBorderStyles.variants.isFocusWithin,
-    ...fieldBorderStyles.variants
-  }
-})
+    ...fieldBorderStyles.variants,
+  },
+});
 
 export function TextField({ label, description, errorMessage, ...props }) {
   return (
@@ -26,7 +26,7 @@ export function TextField({ label, description, errorMessage, ...props }) {
       {...props}
       className={composeTailwindRenderProps(
         props.className,
-        "flex flex-col gap-1"
+        "flex flex-col gap-1",
       )}
     >
       {label && <Label>{label}</Label>}
@@ -34,5 +34,5 @@ export function TextField({ label, description, errorMessage, ...props }) {
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
     </AriaTextField>
-  )
+  );
 }

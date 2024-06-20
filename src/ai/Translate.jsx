@@ -1,14 +1,14 @@
-import Helper from './Helper'
+import Helper from "./Helper";
 
-function Translate ({ message }) {
+function Translate({ message }) {
   return (
     <Helper
-      type='translate'
+      type="translate"
       text={message}
-      loadingMsg='Translating...'
+      loadingMsg="Translating..."
       retry={false}
     />
-  )
+  );
 }
 
-export default Translate
+export default Translate;

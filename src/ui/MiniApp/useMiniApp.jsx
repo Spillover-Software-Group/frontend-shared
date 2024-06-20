@@ -1,29 +1,31 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState } from "react";
 
 const MiniAppContext = createContext({
-  currentScreen: null
-})
+  currentScreen: null,
+});
 
-function useMiniApp () {
-  const context = useContext(MiniAppContext)
+function useMiniApp() {
+  const context = useContext(MiniAppContext);
 
   if (!context) {
-    throw new Error('useMiniApp must be used within a MiniAppProvider')
+    throw new Error("useMiniApp must be used within a MiniAppProvider");
   }
 
-  return context
+  return context;
 }
 
-function MiniAppProvider ({ onCloseButtonClick, children }) {
-  const [currentScreen, setCurrentScreen] = useState(null)
+function MiniAppProvider({ onCloseButtonClick, children }) {
+  const [currentScreen, setCurrentScreen] = useState(null);
 
-  const goHome = () => setCurrentScreen(null)
+  const goHome = () => setCurrentScreen(null);
 
   return (
-    <MiniAppContext.Provider value={{ currentScreen, setCurrentScreen, goHome, onCloseButtonClick }}>
+    <MiniAppContext.Provider
+      value={{ currentScreen, setCurrentScreen, goHome, onCloseButtonClick }}
+    >
       {children}
     </MiniAppContext.Provider>
-  )
+  );
 }
 
-export { useMiniApp, MiniAppProvider }
+export { useMiniApp, MiniAppProvider };

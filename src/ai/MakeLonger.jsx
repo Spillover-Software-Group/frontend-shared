@@ -1,14 +1,14 @@
-import Helper from './Helper'
+import Helper from "./Helper";
 
-function MakeLonger ({ text, onOptionSelected }) {
+function MakeLonger({ text, onOptionSelected }) {
   return (
     <Helper
-      type='make_longer'
+      type="make_longer"
       text={text}
       onOptionSelected={onOptionSelected}
-      loadingMsg='Making text longer...'
+      loadingMsg="Making text longer..."
     />
-  )
+  );
 }
 
-export default MakeLonger
+export default MakeLonger;

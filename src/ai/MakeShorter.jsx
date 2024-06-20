@@ -1,14 +1,14 @@
-import Helper from './Helper'
+import Helper from "./Helper";
 
-function MakeShorter ({ text, onOptionSelected }) {
+function MakeShorter({ text, onOptionSelected }) {
   return (
     <Helper
-      type='make_shorter'
+      type="make_shorter"
       text={text}
       onOptionSelected={onOptionSelected}
-      loadingMsg='Making text shorter...'
+      loadingMsg="Making text shorter..."
     />
-  )
+  );
 }
 
-export default MakeShorter
+export default MakeShorter;

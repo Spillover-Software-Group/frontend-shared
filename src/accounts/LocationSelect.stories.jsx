@@ -1,4 +1,4 @@
-import { LocationSelect } from "./LocationSelect"
+import { LocationSelect } from "./LocationSelect";
 
 export default {
   component: LocationSelect,
@@ -8,6 +8,6 @@ export default {
       { id: 2, name: "Location 2" },
     ],
   },
-}
+};
 
-export const Example = args => <LocationSelect {...args} />
+export const Example = (args) => <LocationSelect {...args} />;

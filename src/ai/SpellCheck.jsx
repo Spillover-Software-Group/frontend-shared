@@ -1,14 +1,14 @@
-import Helper from './Helper'
+import Helper from "./Helper";
 
-function SpellCheck ({ text, onOptionSelected }) {
+function SpellCheck({ text, onOptionSelected }) {
   return (
     <Helper
-      type='spellcheck'
+      type="spellcheck"
       text={text}
       onOptionSelected={onOptionSelected}
-      loadingMsg='Checking spelling...'
+      loadingMsg="Checking spelling..."
     />
-  )
+  );
 }
 
-export default SpellCheck
+export default SpellCheck;

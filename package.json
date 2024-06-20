@@ -5,14 +5,13 @@
   "private": true,
   "type": "module",
   "module": "./dist/frontend-shared.es.js",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "start": "npm run storybook",
     "build": "vite build",
     "storybook": "storybook dev -p 1234",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "fix": "biome check --write ./src/**/*"
   },
   "repository": {
     "type": "git",

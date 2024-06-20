@@ -1,29 +1,29 @@
-import { Form } from "react-aria-components"
+import { Form } from "react-aria-components";
 
-import { Button } from "./Button"
-import { Select, SelectItem, SelectSection } from "./Select"
+import { Button } from "./Button";
+import { Select, SelectItem, SelectSection } from "./Select";
 
 const meta = {
   component: Select,
-}
+};
 
-export default meta
+export default meta;
 
-export const Example = args => (
+export const Example = (args) => (
   <Select {...args}>
     <SelectItem>Chocolate</SelectItem>
     <SelectItem id="mint">Mint</SelectItem>
     <SelectItem>Strawberry</SelectItem>
     <SelectItem>Vanilla</SelectItem>
   </Select>
-)
+);
 
-export const DisabledItems = args => <Example {...args} />
+export const DisabledItems = (args) => <Example {...args} />;
 DisabledItems.args = {
-  disabledKeys: ["mint"]
-}
+  disabledKeys: ["mint"],
+};
 
-export const Sections = args => (
+export const Sections = (args) => (
   <Select {...args}>
     <SelectSection title="Fruit">
       <SelectItem id="Apple">Apple</SelectItem>
@@ -46,21 +46,21 @@ export const Sections = args => (
       <SelectItem id="Potatoes">Potatoes</SelectItem>
     </SelectSection>
   </Select>
-)
+);
 
 Sections.args = {
-  label: "Preferred fruit or vegetable"
-}
+  label: "Preferred fruit or vegetable",
+};
 
-export const Validation = args => (
+export const Validation = (args) => (
   <Form className="flex flex-col gap-2 items-start">
     <Example {...args} />
     <Button type="submit" variant="secondary">
       Submit
     </Button>
   </Form>
-)
+);
 
 Validation.args = {
-  isRequired: true
-}
+  isRequired: true,
+};

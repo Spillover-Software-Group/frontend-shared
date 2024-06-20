@@ -1,15 +1,15 @@
-import { Button } from "./Button"
-import { DateField } from "./DateField"
-import { Form } from "./Form"
-import { TextField } from "./TextField"
+import { Button } from "./Button";
+import { DateField } from "./DateField";
+import { Form } from "./Form";
+import { TextField } from "./TextField";
 
 const meta = {
   component: Form,
-}
+};
 
-export default meta
+export default meta;
 
-export const Example = args => (
+export const Example = (args) => (
   <Form {...args}>
     <TextField label="Email" name="email" type="email" isRequired />
     <DateField label="Birth date" isRequired />
@@ -20,4 +20,4 @@ export const Example = args => (
       </Button>
     </div>
   </Form>
-)
+);

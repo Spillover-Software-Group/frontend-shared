@@ -1,32 +1,32 @@
-import { Form } from "react-aria-components"
+import { Form } from "react-aria-components";
 
-import { Button } from "./Button"
-import { ComboBox, ComboBoxItem, ComboBoxSection } from "./ComboBox"
+import { Button } from "./Button";
+import { ComboBox, ComboBoxItem, ComboBoxSection } from "./ComboBox";
 
 const meta = {
   component: ComboBox,
   args: {
-    label: "Ice cream flavor"
-  }
-}
+    label: "Ice cream flavor",
+  },
+};
 
-export default meta
+export default meta;
 
-export const Example = args => (
+export const Example = (args) => (
   <ComboBox {...args}>
     <ComboBoxItem>Chocolate</ComboBoxItem>
     <ComboBoxItem id="mint">Mint</ComboBoxItem>
     <ComboBoxItem>Strawberry</ComboBoxItem>
     <ComboBoxItem>Vanilla</ComboBoxItem>
   </ComboBox>
-)
+);
 
-export const DisabledItems = args => <Example {...args} />
+export const DisabledItems = (args) => <Example {...args} />;
 DisabledItems.args = {
-  disabledKeys: ["mint"]
-}
+  disabledKeys: ["mint"],
+};
 
-export const Sections = args => (
+export const Sections = (args) => (
   <ComboBox {...args}>
     <ComboBoxSection title="Fruit">
       <ComboBoxItem id="Apple">Apple</ComboBoxItem>
@@ -49,21 +49,21 @@ export const Sections = args => (
       <ComboBoxItem id="Potatoes">Potatoes</ComboBoxItem>
     </ComboBoxSection>
   </ComboBox>
-)
+);
 
 Sections.args = {
-  label: "Preferred fruit or vegetable"
-}
+  label: "Preferred fruit or vegetable",
+};
 
-export const Validation = args => (
+export const Validation = (args) => (
   <Form className="flex flex-col gap-2 items-start">
     <Example {...args} />
     <Button type="submit" variant="secondary">
       Submit
     </Button>
   </Form>
-)
+);
 
 Validation.args = {
-  isRequired: true
-}
+  isRequired: true,
+};
