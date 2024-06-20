@@ -149,6 +149,7 @@ export function usePresetDateRangeSelector({
   };
 
   // Trigger the initial selection
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once
   useEffect(() => {
     onSelectionChange(defaultPreset);
   }, []);

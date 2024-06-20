@@ -36,6 +36,7 @@ function GenerateCaption({ onOptionSelected }) {
           <textarea
             className="box-border w-full h-20 border border-gray-300 rounded-md p-2"
             {...register("context")}
+            // biome-ignore lint/a11y/noAutofocus: intentional
             autoFocus
           />
         </div>
@@ -61,6 +62,7 @@ function GenerateCaption({ onOptionSelected }) {
 
           {options.map((option, index) => (
             <Option
+              // biome-ignore lint/suspicious/noArrayIndexKey: list is stable
               key={index}
               option={option}
               type="post_caption"

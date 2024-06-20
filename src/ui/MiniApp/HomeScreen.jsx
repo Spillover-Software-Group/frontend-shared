@@ -1,3 +1,4 @@
+import { a11yClickProps } from "@/utils";
 import Screen from "./Screen";
 import { useMiniApp } from "./useMiniApp";
 
@@ -12,8 +13,9 @@ function HomeScreen({ title, Icon, children }) {
 
           return (
             <div
+              // biome-ignore lint/suspicious/noArrayIndexKey: list is stable
               key={index}
-              onClick={() => setCurrentScreen(child)}
+              {...a11yClickProps(() => setCurrentScreen(child))}
               className="flex flex-row items-center gap-2 p-3 text-md bg-gray-200 rounded-md cursor-pointer transition duration-200 hover:bg-gray-300"
             >
               {ChildIcon && <ChildIcon />}

@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, XIcon } from "lucide-react";
 
+import { a11yClickProps } from "@/utils";
 import { useMiniApp } from "./useMiniApp";
 
 function Header({ title, Icon, noBack }) {
@@ -11,7 +12,7 @@ function Header({ title, Icon, noBack }) {
         <div className="w-14" />
       ) : (
         <div
-          onClick={goHome}
+          {...a11yClickProps(goHome)}
           className="h-full px-4 flex flex-row items-center cursor-pointer hover:bg-gray-200 transition duration-200"
         >
           <ChevronLeftIcon />
@@ -25,7 +26,7 @@ function Header({ title, Icon, noBack }) {
 
       {onCloseButtonClick && (
         <div
-          onClick={onCloseButtonClick}
+          {...a11yClickProps(onCloseButtonClick)}
           className="h-full px-4 flex flex-row items-center cursor-pointer hover:bg-gray-200 transition duration-200"
         >
           <XIcon />

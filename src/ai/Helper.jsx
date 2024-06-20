@@ -23,6 +23,7 @@ function Helper({
     }
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally run once
   useEffect(() => {
     if (autoRun) run();
   }, []);
@@ -46,6 +47,7 @@ function Helper({
 
       {generatedOptions?.map((option, index) => (
         <Option
+          // biome-ignore lint/suspicious/noArrayIndexKey: list is stable
           key={index}
           type={type}
           option={option}
