@@ -12,7 +12,7 @@ const button = tv({
       primary:
         "bg-spillover-700 hover:bg-spillover-500 pressed:bg-spillover-400 text-white",
       secondary:
-        "bg-gray-100 hover:bg-gray-200 pressed:bg-gray-300 text-gray-800 dark:bg-zinc-600 dark:hover:bg-zinc-500 dark:pressed:bg-zinc-400 dark:text-zinc-100",
+        "bg-gray-100 hover:bg-gray-200 pressed:bg-gray-300 text-gray-800 dark:bg-zinc-600 dark:hover:bg-zinc-500 dark:pressed:bg-zinc-400 dark:text-zinc-100 shadow-sm",
       destructive:
         "bg-orange-700 hover:bg-orange-800 pressed:bg-orange-900 text-white",
       icon: "text-gray-500 p-0 shadow-none",
@@ -46,6 +46,7 @@ export function Button({
   return (
     <RACButton
       {...props}
+      isDisabled={props.isDisabled || isLoading}
       className={composeRenderProps(props.className, (className, renderProps) =>
         button({
           ...renderProps,

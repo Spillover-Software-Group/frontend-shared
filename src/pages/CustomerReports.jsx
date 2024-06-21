@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-import { FileDownIcon } from "lucide-react";
 import { useState } from "react";
 import { DateFormatter, getLocalTimeZone } from "@internationalized/date";
 
@@ -8,8 +7,8 @@ import { BusinessSelect, useBusinessSelect } from "@/accounts/BusinessSelect";
 import { LocationSelect, useLocationSelect } from "@/accounts/LocationSelect";
 import { useAccountsQuery } from "@/hooks/useAccounts";
 import { Section } from "@/ui/Section";
-import { Button } from "@/ui/Button";
 import { DateRangePicker } from "@/ui/DateRangePicker";
+import { ExportButton } from "./ExportButton";
 import {
   PresetDateRangeSelector,
   usePresetDateRangeSelector,
@@ -110,7 +109,11 @@ export function CustomerReports({
         </div>
 
         <div className="sfs-customer-reports__right flex flex-row gap-4 items-center">
-          <Button Icon={FileDownIcon}>Export</Button>
+          <ExportButton
+            business={business}
+            location={location}
+            dateRange={dateRange}
+          />
         </div>
       </div>
 
