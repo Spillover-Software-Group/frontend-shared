@@ -46,7 +46,7 @@ const emailAddressesValidator = zod
   .transform((value) => value.split(",").map((email) => email.trim()))
   .pipe(zod.string().email().array());
 
-export function ExportButton({ business, location, dateRange }) {
+export function ExportButton({ business, location, dateRange, ...props }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data } = useAccountsQuery(CURRENT_ACCOUNT_QUERY);
@@ -90,7 +90,9 @@ export function ExportButton({ business, location, dateRange }) {
 
   return (
     <DialogTrigger>
-      <Button Icon={FileDownIcon}>Export</Button>
+      <Button Icon={FileDownIcon} {...props}>
+        Export
+      </Button>
       <Modal UNSTABLE_portalContainer={document.getElementById("sfs-portal")}>
         <Dialog>
           {({ close }) => (

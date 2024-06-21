@@ -32851,32 +32851,32 @@ const ZP = er`
     id
   }
 }`, JP = xs().transform((e) => e.split(",").map((t) => t.trim())).pipe(xs().email().array());
-function XP({ business: e, location: t, dateRange: r }) {
-  var l;
-  const [n, i] = ee(!1), { data: a } = fd(ZP), [o] = kE(YP), s = (l = a == null ? void 0 : a.currentAccount) == null ? void 0 : l.email, u = async (c) => {
-    i(!0), c.preventDefault();
-    const d = new FormData(c.target).get("emailAddresses").split(",").map((h) => h.trim()), f = o({
+function XP({ business: e, location: t, dateRange: r, ...n }) {
+  var c;
+  const [i, a] = ee(!1), { data: o } = fd(ZP), [s] = kE(YP), u = (c = o == null ? void 0 : o.currentAccount) == null ? void 0 : c.email, l = async (d) => {
+    a(!0), d.preventDefault();
+    const f = new FormData(d.target).get("emailAddresses").split(",").map((p) => p.trim()), h = s({
       variables: {
         businessId: e.id,
         locationId: t == null ? void 0 : t.id,
         startDate: r.start.toString(),
         endDate: r.end.toString(),
-        emailAddresses: d
+        emailAddresses: f
       }
     });
     await Ie.promise(
-      f,
+      h,
       {
         pending: "Requesting report...",
         success: "Report requested successfully, it should be in your inbox soon.",
         error: "Failed to request report. Please try again."
       },
       { position: "bottom-right" }
-    ), i(!1);
+    ), a(!1);
   };
   return /* @__PURE__ */ ge(Q1, { children: [
-    /* @__PURE__ */ R(Rt, { Icon: VE, children: "Export" }),
-    /* @__PURE__ */ R(HP, { UNSTABLE_portalContainer: document.getElementById("sfs-portal"), children: /* @__PURE__ */ R(of, { children: ({ close: c }) => /* @__PURE__ */ ge("div", { className: "flex flex-col gap-4", children: [
+    /* @__PURE__ */ R(Rt, { Icon: VE, ...n, children: "Export" }),
+    /* @__PURE__ */ R(HP, { UNSTABLE_portalContainer: document.getElementById("sfs-portal"), children: /* @__PURE__ */ R(of, { children: ({ close: d }) => /* @__PURE__ */ ge("div", { className: "flex flex-col gap-4", children: [
       /* @__PURE__ */ R(kP, { slot: "title", children: "Export Report" }),
       /* @__PURE__ */ ge("div", { className: "flex flex-col gap-1 text-slate-600 text-sm font-medium", children: [
         /* @__PURE__ */ ge("p", { children: [
@@ -32892,8 +32892,8 @@ function XP({ business: e, location: t, dateRange: r }) {
       /* @__PURE__ */ ge(
         WP,
         {
-          onSubmit: (d) => {
-            u(d), c();
+          onSubmit: (f) => {
+            l(f), d();
           },
           children: [
             /* @__PURE__ */ R("p", { className: "text-slate-600 text-sm", children: "Type in the email addresses you would like to send the report to." }),
@@ -32904,20 +32904,20 @@ function XP({ business: e, location: t, dateRange: r }) {
                 description: "Separate multiple email addresses with a comma",
                 name: "emailAddresses",
                 isRequired: !0,
-                defaultValue: s,
-                validate: (d) => {
-                  const { success: f } = JP.safeParse(d);
-                  if (!f) return "Invalid email addresses";
+                defaultValue: u,
+                validate: (f) => {
+                  const { success: h } = JP.safeParse(f);
+                  if (!h) return "Invalid email addresses";
                 }
               }
             ),
             /* @__PURE__ */ ge("div", { className: "flex flex-row gap-4 justify-end items-center", children: [
-              /* @__PURE__ */ R(Rt, { variant: "secondary", onClick: c, children: "Cancel" }),
+              /* @__PURE__ */ R(Rt, { variant: "secondary", onClick: d, children: "Cancel" }),
               /* @__PURE__ */ R(
                 Rt,
                 {
                   Icon: UE,
-                  isLoading: n,
+                  isLoading: i,
                   type: "submit",
                   children: "Send"
                 }
@@ -33194,6 +33194,7 @@ function hT({
       /* @__PURE__ */ R("div", { className: "sfs-customer-reports__right flex flex-row gap-4 items-center", children: /* @__PURE__ */ R(
         XP,
         {
+          isDisabled: !n || !o,
           business: n,
           location: a,
           dateRange: o

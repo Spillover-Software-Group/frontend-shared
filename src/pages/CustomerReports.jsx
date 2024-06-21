@@ -110,6 +110,7 @@ export function CustomerReports({
 
         <div className="sfs-customer-reports__right flex flex-row gap-4 items-center">
           <ExportButton
+            isDisabled={!business || !dateRange}
             business={business}
             location={location}
             dateRange={dateRange}
