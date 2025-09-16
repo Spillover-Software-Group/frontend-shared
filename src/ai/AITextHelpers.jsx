@@ -5,7 +5,9 @@ import {
   EllipsisIcon,
   FeatherIcon,
   FileTextIcon,
+  HeartHandshakeIcon,
   LanguagesIcon,
+  LaughIcon,
   ListIcon,
   ReplyIcon,
   SmilePlusIcon,
@@ -25,6 +27,8 @@ import MakeLonger from "./MakeLonger";
 import MakeShorter from "./MakeShorter";
 import MakeMoreFormal from "./MakeMoreFormal";
 import MakeMoreCasual from "./MakeMoreCasual";
+import MakeFriendlier from "./MakeFriendlier";
+import MakeFunnier from "./MakeFunnier";
 import ContinueWriting from "./ContinueWriting";
 import GenerateReviewReply from "./GenerateReviewReply";
 import GenerateCommentReply from "./GenerateCommentReply";
@@ -101,6 +105,18 @@ const SCREENS = [
     title: "Make More Casual",
     Icon: SmilePlusIcon,
     component: MakeMoreCasual,
+  },
+  {
+    name: "MakeFriendlier",
+    title: "Make Friendlier",
+    Icon: HeartHandshakeIcon,
+    component: MakeFriendlier,
+  },
+  {
+    name: "MakeFunnier",
+    title: "Make Funnier",
+    Icon: LaughIcon,
+    component: MakeFunnier,
   },
   {
     name: "ContinueWriting",
