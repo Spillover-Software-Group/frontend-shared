@@ -1,6 +1,6 @@
 {
   "name": "@spillover/frontend-shared",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Shared front-end code for Spillover projects",
   "author": "Felipe Zavan <felipe@zavan.me>",
   "license": "UNLICENSED",
