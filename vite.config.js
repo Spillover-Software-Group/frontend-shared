@@ -20,6 +20,17 @@ export default defineConfig({
       "@tailwindConfig": fullPath("./tailwind.config.js"),
     },
   },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./test/setup.js",
+    // Tests live under test/ mirroring src/, never beside the components, so the
+    // library build never has to exclude them. Stories are documentation, not tests.
+    include: ["test/**/*.test.{js,jsx}"],
+    // Agent worktrees hold in-progress copies of this repo; without this, vitest
+    // picks up their test files and another branch's work fails this branch's run.
+    exclude: ["**/node_modules/**", "**/dist/**", "**/.claude/**"],
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.js"),
