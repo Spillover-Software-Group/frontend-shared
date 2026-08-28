@@ -12,9 +12,9 @@ each consumer. About two dozen components are also forked byte-identically into
 - `npm run build` builds `dist/`.
 - Every JS package in the monorepo verifies with the same two scripts, `npm run check` (read-only
   Biome, `--error-on-warnings`) and `npm test` (Vitest, single run); `npm run fix` is the writing
-  variant and is never used to verify. This package gets `check` and `test` with its first test, and
-  its Biome config is renamed to `biome.jsonc` at the same time, the filename the rest of the
-  monorepo uses.
+  variant and is never used to verify. Biome is configured in `biome.jsonc`, the filename the rest
+  of the monorepo uses, and `check` skips `dist/` because that is committed build output rather
+  than source.
 
 ## Testing
 
