@@ -11,7 +11,8 @@
     "build": "vite build",
     "storybook": "storybook dev -p 1234",
     "build-storybook": "storybook build",
-    "fix": "biome check --write ./src/**/*"
+    "check": "biome check --error-on-warnings .",
+    "fix": "biome check --write ."
   },
   "repository": {
     "type": "git",
