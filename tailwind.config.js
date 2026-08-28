@@ -4,14 +4,14 @@ import racPlugin from "tailwindcss-react-aria-components";
 
 import {
   isolateInsideOfContainer,
-  scopedPreflightStyles
-} from 'tailwindcss-scoped-preflight';
+  scopedPreflightStyles,
+} from "tailwindcss-scoped-preflight";
 
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
-  content: ['./src/**/*.{js,jsx}'],
-  important: '.sfs-isolate',
+  content: ["./src/**/*.{js,jsx}"],
+  important: ".sfs-isolate",
   theme: {
     container: {
       center: true,
@@ -23,16 +23,16 @@ export default {
     extend: {
       colors: {
         spillover: {
-          100: '#D28078',
-          200: '#C86A63',
-          300: '#BE544E',
-          400: '#B33C38',
-          500: '#A71E22',
-          600: '#91191C',
-          700: '#7B1316',
-          800: '#660E11',
-          900: '#52090B',
-        }
+          100: "#D28078",
+          200: "#C86A63",
+          300: "#BE544E",
+          400: "#B33C38",
+          500: "#A71E22",
+          600: "#91191C",
+          700: "#7B1316",
+          800: "#660E11",
+          900: "#52090B",
+        },
       },
       fontFamily: {
         sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
@@ -54,8 +54,10 @@ export default {
     },
   },
   plugins: [
-    scopedPreflightStyles({ isolationStrategy: isolateInsideOfContainer('.sfs-isolate') }),
+    scopedPreflightStyles({
+      isolationStrategy: isolateInsideOfContainer(".sfs-isolate"),
+    }),
     racPlugin,
-    tailwindAnimatePlugin
+    tailwindAnimatePlugin,
   ],
-}
+};
