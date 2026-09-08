@@ -3,7 +3,7 @@
 Shared React component library (`@spillover/frontend-shared`), consumed as a git dependency by
 `accounts/src/frontend`, `engage/src/front_end_v6` and `senalysis/src/app`. `dist/` is committed:
 a change reaches consumers only after `npm run build`, a commit of `dist/`, and a lockfile bump in
-each consumer. About two dozen components are also forked byte-identically into
+each consumer. About two dozen components are also forked into
 `engage/src/front_end_v6/src/components/ui/`; a fix there is applied in both places.
 
 ## Scripts
@@ -23,6 +23,16 @@ Testing Library, tests under `test/` mirroring `src/`. This is the **only** plac
 are tested: a component gets its test here, and the engage fork mirrors the test alongside the
 component. A component with no test here is not forked further. Stories under `src/**/*.stories.*`
 are visual documentation, not tests.
+
+**A test of a forked component is written to be copied, not adapted.** It imports the component as
+`@/components/ui/<Name>`, the path that component has in engage, which `vite.config.js` aliases back
+onto `src/ui` here. Everything else it touches has to exist on both sides too: third-party packages
+both `package.json` files carry, and the test setup file, never a helper that only lives in one
+repo. A test that needs an edit to cross the boundary stops being the same test.
+
+The test document has to stand in for the consumer's host page. Both host pages carry
+`<div id="sfs-portal">`, and `Popover` renders its content into it and nothing at all without it, so
+`test/setup.js` creates that element.
 
 **What a test may fake.** Mock only at real boundaries: the network (`fetch`, Apollo through
 `MockedProvider` with the real query documents), `@/config`, timers and the clock, `window.location`,
