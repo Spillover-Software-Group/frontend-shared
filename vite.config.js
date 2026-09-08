@@ -13,6 +13,14 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      // Two dozen components under src/ui are forked into
+      // engage/src/front_end_v6/src/components/ui, and their tests are copied
+      // over with them. These two entries let a test import a component by the
+      // path it has in engage, so the same test file resolves in both repos and
+      // the copy stays literal. No source file imports through them.
+      "@/components/ui/utils": fullPath("./src/utils.jsx"),
+      "@/components/ui": fullPath("./src/ui"),
+
       // So modules can be imported relative to src instead of ../../../...
       "@": fullPath("./src"),
 
