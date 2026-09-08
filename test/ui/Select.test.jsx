@@ -16,7 +16,9 @@ describe("Select", () => {
   it("keeps its options out of the document until it is opened", () => {
     render(<PlanSelect />);
 
-    expect(screen.queryByRole("option", { name: "Pro" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("option", { name: "Pro" }),
+    ).not.toBeInTheDocument();
   });
 
   it("lists its options once the trigger is pressed", async () => {
@@ -68,9 +70,9 @@ describe("Select", () => {
   it("describes its trigger with the description it is given", () => {
     render(<PlanSelect description="Changes take effect next month." />);
 
-    expect(screen.getByRole("button", { name: /Plan/ })).toHaveAccessibleDescription(
-      "Changes take effect next month.",
-    );
+    expect(
+      screen.getByRole("button", { name: /Plan/ }),
+    ).toHaveAccessibleDescription("Changes take effect next month.");
   });
 
   it("shows its error message once it is invalid", () => {
@@ -84,6 +86,8 @@ describe("Select", () => {
 
     await userEvent.click(screen.getByRole("button", { name: /Plan/ }));
 
-    expect(screen.queryByRole("option", { name: "Pro" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("option", { name: "Pro" }),
+    ).not.toBeInTheDocument();
   });
 });

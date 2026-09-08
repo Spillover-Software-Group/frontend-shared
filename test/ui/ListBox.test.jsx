@@ -68,7 +68,9 @@ describe("ListBox", () => {
 
     await userEvent.click(screen.getByRole("option", { name: "Airport" }));
 
-    expect(screen.queryByRole("option", { selected: true })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("option", { selected: true }),
+    ).not.toBeInTheDocument();
   });
 
   it("moves the selection to the next item on ArrowDown", async () => {
@@ -96,14 +98,17 @@ describe("DropdownSection", () => {
   it("renders its title above the items it holds", () => {
     render(
       <ListBox aria-label="Locations" selectionMode="single">
-        <DropdownSection title="Texas" items={[{ id: "austin", name: "Austin" }]}>
+        <DropdownSection
+          title="Texas"
+          items={[{ id: "austin", name: "Austin" }]}
+        >
           {(location) => <DropdownItem>{location.name}</DropdownItem>}
         </DropdownSection>
       </ListBox>,
     );
 
-    expect(
-      screen.getByRole("group", { name: "Texas" }),
-    ).toContainElement(screen.getByRole("option", { name: "Austin" }));
+    expect(screen.getByRole("group", { name: "Texas" })).toContainElement(
+      screen.getByRole("option", { name: "Austin" }),
+    );
   });
 });
