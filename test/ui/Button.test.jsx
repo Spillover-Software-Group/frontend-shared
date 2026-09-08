@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { Button } from "@/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 describe("Button", () => {
   it("renders its children as the accessible name of a button", () => {
