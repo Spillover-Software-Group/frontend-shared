@@ -59,14 +59,14 @@ export function CustomerReports({
   const { presetDateRangeProps, setSelectedPresetDateRange } =
     usePresetDateRangeSelector({
       defaultPreset: "last30Days",
-      onChange: (preset, dateRange) => {
+      onChange: (preset, newDateRange) => {
         if (preset === "custom") return;
-        setDateRange(dateRange);
+        setDateRange(newDateRange);
       },
     });
 
-  const onDateRangeChange = (dateRange) => {
-    setDateRange(dateRange);
+  const onDateRangeChange = (newDateRange) => {
+    setDateRange(newDateRange);
     setSelectedPresetDateRange("custom");
   };
 

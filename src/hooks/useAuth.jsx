@@ -233,6 +233,4 @@ function useProvideAuth({ mode, ownerId }) {
   };
 }
 
-export default useAuth;
-
 export { useAuth, AuthProvider, getAccessToken, refreshAccessToken };
