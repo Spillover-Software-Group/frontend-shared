@@ -34,12 +34,12 @@ export const Example = (args) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="text-lg bg-gray-100 rounded-lg p-4">{message}</div>
+      <div className="rounded-lg bg-gray-100 p-4 text-lg">{message}</div>
 
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="w-full h-20 border border-gray-300 rounded-md p-2"
+        className="h-20 w-full rounded-md border border-gray-300 p-2"
       />
 
       <AITextHelpers

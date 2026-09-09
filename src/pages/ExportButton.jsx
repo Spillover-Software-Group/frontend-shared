@@ -99,7 +99,7 @@ export function ExportButton({ business, location, dateRange, ...props }) {
             <div className="flex flex-col gap-4">
               <Heading slot="title">Export Report</Heading>
 
-              <div className="flex flex-col gap-1 text-slate-600 text-sm font-medium">
+              <div className="flex flex-col gap-1 font-medium text-slate-600 text-sm">
                 <p>
                   {business.name} {location && ` - ${location.name}`}
                 </p>
@@ -136,7 +136,7 @@ export function ExportButton({ business, location, dateRange, ...props }) {
                   }}
                 />
 
-                <div className="flex flex-row gap-4 justify-end items-center">
+                <div className="flex flex-row items-center justify-end gap-4">
                   <Button variant="secondary" onClick={close}>
                     Cancel
                   </Button>
