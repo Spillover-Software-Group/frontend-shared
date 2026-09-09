@@ -133,16 +133,21 @@
   },
   "overrides": [
     {
-      // The fork. Every file here except `src/ui/index.js`, plus `src/utils.jsx`, is copied
-      // byte-for-byte into `engage`'s `src/components/ui/`, and the point of the copy is that
-      // `diff` is the whole drift check. `engage` switches these same three rules off for that
-      // directory and says so in its own config. A rule that rewrites one of these files here
-      // would put the two sides out of step on the other side, where nobody is diffing.
+      // The fork. Every file here except `src/ui/index.js`, plus `src/utils.jsx`, is copied into
+      // `engage`'s `src/components/ui/`: 36 files, of which 28 are byte-for-byte today. The point
+      // of the copy is that `diff` between the two directories is the whole drift check, and only
+      // two kinds of difference belong in it - the import specifier for `utils`, which has a
+      // different path on each side, and a component `engage` has deliberately diverged. `engage`
+      // switches these rules off for its copy and says so in its own config. A rule that rewrites
+      // one of these files here puts the two sides out of step on the other side, where nobody is
+      // diffing.
       //
-      // So they come back on in both repos at once or in neither. Adopting them costs, today,
-      // 42 `useSortedClasses` fixes and 2 `noShadow` fixes here plus the matching copy into
-      // `engage`; until someone does that pair of changes together, off is the honest setting
-      // rather than a baseline that invites a well-meant fix.
+      // Do not turn them on here, and do not turn them on in both repos together either. That
+      // trade was considered and declined: 42 class reorderings and 2 shadow fixes, plus a
+      // re-copy into a merged repo, spends the byte-identity that makes the fork tractable on
+      // ordering that changes no behaviour. The fix these rules are waiting on is de-forking, not
+      // a synchronised lint pass. Off with that reason beats a baseline, which would read as an
+      // invitation to fix them one file at a time.
       //
       // `useUniqueElementIds`, which `engage` also switches off here, is not in this list: every
       // one of its findings in these files was a React Aria collection key, and naming those

@@ -34,9 +34,11 @@ records what was measured. Re-measure before raising one.
 
 **No rule that rewrites a forked file is enabled.** Sorting imports and sorting Tailwind classes
 would both reorder the upstream half of a fork pair and put it out of step with engage, where
-nobody is diffing. Engage switches the same rules off for its copy and says so. They come back on
-in both repos in one coordinated change or in neither, so do not turn one on here alone, and do not
-"fix" a finding in `src/ui/` that only engage's config is currently hiding.
+nobody is diffing. Engage switches the same rules off for its copy and says so. Do not turn one on
+here alone, do not turn them on in both repos together, and do not "fix" a finding in `src/ui/`
+that only engage's config is currently hiding: the trade has been considered and declined, because
+reordering that changes no behaviour is not worth spending the byte-identity that makes the fork
+checkable. What these rules wait on is de-forking, not a synchronised lint pass.
 
 **Before reaching for a suppression, check the rule's options.** Every `useUniqueElementIds`
 finding in this package was a React Aria collection key rather than a DOM id, and the rule has an
