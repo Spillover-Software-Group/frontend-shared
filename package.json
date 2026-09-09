@@ -5,7 +5,9 @@
   "private": true,
   "type": "module",
   "module": "./dist/frontend-shared.es.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "npm run storybook",
     "build": "vite build",
@@ -27,7 +29,7 @@
   },
   "homepage": "https://github.com/Spillover-Software-Group/frontend-shared#readme",
   "devDependencies": {
-    "@biomejs/biome": "1.8.2",
+    "@biomejs/biome": "2.5.10",
     "@storybook/addon-essentials": "^8.1.10",
     "@storybook/addon-interactions": "^8.1.10",
     "@storybook/addon-links": "^8.1.10",

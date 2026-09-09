@@ -1,14 +1,24 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
-  "organizeImports": {
-    "enabled": false
+  "$schema": "https://biomejs.dev/schemas/2.5.10/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        // Import sorting is off for the whole package, and it has to stay off. About two thirds of
+        // `src/ui/` is forked byte-for-byte into `engage`'s `src/components/ui/`, where the value of
+        // the fork is that `diff` tells you at a glance whether it has drifted. `engage` switches
+        // sorting off for that directory for the same reason. Sorting here would reorder the
+        // upstream half of those pairs and silently break the invariant on the other side, where
+        // nobody is looking.
+        "organizeImports": "off"
+      }
+    }
   },
   "files": {
     // `dist/` is the committed build output: bundled, partly vendored third-party
     // code that no one edits by hand. Linting it drowns the report in thousands of
     // findings nobody can act on. It is checked in so consumers can install this
     // package straight from git, not because it is source.
-    "ignore": ["dist"]
+    "includes": ["**", "!**/dist"]
   },
   "formatter": {
     "indentStyle": "space",
@@ -17,7 +27,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "preset": "recommended"
     }
   }
 }
