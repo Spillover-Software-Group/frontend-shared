@@ -29,5 +29,20 @@
     "rules": {
       "preset": "recommended"
     }
-  }
+  },
+  "overrides": [
+    {
+      // Tailwind 3 syntax, not code debt and never something to "fix": `@tailwind` pulls in the
+      // framework's layers, and it is stripped long before this CSS reaches a browser. Permanent
+      // for as long as this package is on Tailwind 3.
+      "includes": ["src/styles.css"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noUnknownAtRules": "off"
+          }
+        }
+      }
+    }
+  ]
 }
