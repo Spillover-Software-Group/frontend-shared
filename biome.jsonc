@@ -24,23 +24,143 @@
     "indentStyle": "space",
     "indentWidth": 2
   },
+  "javascript": {
+    // Vitest runs with `globals: true`, so its API is not imported anywhere. Declaring it here is
+    // what lets `noUndeclaredVariables` sit at a zero baseline and catch real typos.
+    "globals": [
+      "afterAll",
+      "afterEach",
+      "beforeAll",
+      "beforeEach",
+      "describe",
+      "expect",
+      "it",
+      "suite",
+      "test",
+      "vi"
+    ]
+  },
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "recommended"
+      "preset": "recommended",
+      "complexity": {
+        "noRedundantDefaultExport": "error",
+        "useMaxParams": "error",
+        // Ceilings, not targets, and taken from this package's own distribution rather than
+        // inherited: a shared component library is small by construction and its numbers are much
+        // tighter than an application's. Measured across `src/` and `test/`, the longest function is
+        // 69 lines, the longest file 238, and the highest cognitive complexity 9. Each ceiling sits
+        // a step above that, so what they catch is the component that grew a limb, not today's code.
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": { "maxAllowedComplexity": 12 }
+        },
+        "noExcessiveLinesPerFunction": {
+          "level": "error",
+          "options": {
+            "maxLines": 80,
+            "skipBlankLines": true,
+            "skipIifes": true
+          }
+        }
+      },
+      "correctness": {
+        // Catches an import path or a symbol that does not exist. Both need the aliases in
+        // `tsconfig.json`, which is the only place Biome reads them from.
+        "noUnresolvedImports": "error",
+        "noUndeclaredDependencies": "error",
+        "noUndeclaredVariables": "error",
+        // A component defined inside another one is a new type on every render, so it remounts
+        // and loses its state.
+        "noNestedComponentDefinitions": "error",
+        "useUniqueElementIds": "error"
+      },
+      "performance": {
+        "noAwaitInLoops": "error"
+      },
+      "style": {
+        "noExcessiveLinesPerFile": {
+          "level": "error",
+          "options": { "maxLines": 250, "skipBlankLines": true }
+        }
+      },
+      "suspicious": {
+        // A cycle makes every conclusion about a module wrong, including a reader's.
+        "noImportCycles": "error",
+        "noShadow": "error",
+        "useAwait": "error",
+        // Catches a function referenced but never called: `errorAlert;` instead of `errorAlert();`
+        // was live in the ENGAGE frontend until this rule found it.
+        "noUnusedExpressions": "error",
+        // Test hygiene, all at a zero baseline. Cheaper to hold there than to find later.
+        "noExportsInTest": "error",
+        "noMisplacedAssertion": "error"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "error",
+          "options": { "functions": ["clsx", "cn", "cva", "twMerge"] }
+        },
+        "noConditionalExpect": "error",
+        "noIdenticalTestTitle": "error",
+        "useExpect": "error"
+      }
     }
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
   },
   "overrides": [
     {
+      // The fork. Every file here except `src/ui/index.js`, plus `src/utils.jsx`, is copied
+      // byte-for-byte into `engage`'s `src/components/ui/`, and the point of the copy is that
+      // `diff` is the whole drift check. `engage` switches these same three rules off for that
+      // directory and says so in its own config. A rule that rewrites one of these files here
+      // would put the two sides out of step on the other side, where nobody is diffing.
+      //
+      // So they come back on in both repos at once or in neither. Adopting them costs, today,
+      // 42 `useSortedClasses`, 38 `useUniqueElementIds` and 2 `noShadow` fixes here plus the
+      // matching copy into `engage`; until someone does that pair of changes together, off is the
+      // honest setting rather than a baseline that invites a well-meant fix.
+      "includes": ["src/ui/**", "!src/ui/index.js", "src/utils.jsx"],
+      "linter": {
+        "rules": {
+          "correctness": { "useUniqueElementIds": "off" },
+          "nursery": { "useSortedClasses": "off" },
+          "suspicious": { "noShadow": "off" }
+        }
+      }
+    },
+    {
       // Tailwind 3 syntax, not code debt and never something to "fix": `@tailwind` pulls in the
-      // framework's layers, and it is stripped long before this CSS reaches a browser. Permanent
-      // for as long as this package is on Tailwind 3.
+      // framework's layers and is stripped long before this CSS reaches a browser. Biome's
+      // `css.parser.tailwindDirectives` does not cover it - that option teaches the parser
+      // Tailwind 4's `@theme` and friends, and this package is on Tailwind 3. Narrowed to the one
+      // file so a genuinely misspelled at-rule anywhere else still fails.
       "includes": ["src/styles.css"],
       "linter": {
         "rules": {
           "suspicious": {
             "noUnknownAtRules": "off"
           }
+        }
+      }
+    },
+    {
+      // A `describe` block is a function and a long one is normal, so the size ceilings apply to
+      // production code only. `useMaxParams` still applies: a 6-argument test helper is as hard
+      // to call correctly as a 6-argument function.
+      "includes": ["test/**", "**/*.test.js", "**/*.test.jsx"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noExcessiveCognitiveComplexity": "off",
+            "noExcessiveLinesPerFunction": "off"
+          },
+          "style": { "noExcessiveLinesPerFile": "off" }
         }
       }
     }

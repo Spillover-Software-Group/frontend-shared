@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/ui/utils": ["src/utils.jsx"],
+      "@/components/ui/*": ["src/ui/*"],
+      "@/*": ["src/*"],
+      "@tailwindConfig": ["tailwind.config.js"]
+    },
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ES2022"
+  },
+  "include": ["src", "test", "vite.config.js"]
+}
