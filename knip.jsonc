@@ -1,0 +1,19 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  // This is a library, so its entry points are what consumers import, not an app's `main`.
+  // `src/index.js` is the package entry (`module` in `package.json`), and Storybook's config and
+  // stories are entry points of their own: nothing imports a story, the story is the caller.
+  "entry": [
+    "src/index.js",
+    "src/**/*.stories.jsx",
+    ".storybook/{main,preview}.{js,jsx}"
+  ],
+  "project": [
+    "src/**/*.{js,jsx}",
+    "test/**/*.{js,jsx}",
+    ".storybook/**/*.{js,jsx}"
+  ],
+  // Dead files and dependency drift only. Unused *exports* are not reported: in a library they are
+  // the public API by definition, and this package deliberately exports more than it uses.
+  "include": ["files", "dependencies", "unlisted", "duplicates"]
+}
