@@ -74,7 +74,25 @@
         // A component defined inside another one is a new type on every render, so it remounts
         // and loses its state.
         "noNestedComponentDefinitions": "error",
-        "useUniqueElementIds": "error"
+        "useUniqueElementIds": {
+          "level": "error",
+          "options": {
+            // React Aria collection items take `id` as the collection key, not as a DOM id.
+            // Rendered, `<ListBoxItem id="downtown">` produces `data-key="downtown"` on a node whose
+            // actual id is `react-aria-:r0:-option-downtown`, so `getElementById("downtown")` finds
+            // nothing and two of them never collide. All seven of these delegate to a React Aria
+            // primitive; the rule reads the prop name alone and cannot see that.
+            "excludedComponents": [
+              "ComboBoxItem",
+              "ComboBoxSection",
+              "DropdownItem",
+              "DropdownSection",
+              "ListBoxItem",
+              "SelectItem",
+              "SelectSection"
+            ]
+          }
+        }
       },
       "performance": {
         "noAwaitInLoops": "error"
@@ -122,13 +140,16 @@
       // would put the two sides out of step on the other side, where nobody is diffing.
       //
       // So they come back on in both repos at once or in neither. Adopting them costs, today,
-      // 42 `useSortedClasses`, 38 `useUniqueElementIds` and 2 `noShadow` fixes here plus the
-      // matching copy into `engage`; until someone does that pair of changes together, off is the
-      // honest setting rather than a baseline that invites a well-meant fix.
+      // 42 `useSortedClasses` fixes and 2 `noShadow` fixes here plus the matching copy into
+      // `engage`; until someone does that pair of changes together, off is the honest setting
+      // rather than a baseline that invites a well-meant fix.
+      //
+      // `useUniqueElementIds`, which `engage` also switches off here, is not in this list: every
+      // one of its findings in these files was a React Aria collection key, and naming those
+      // components in the rule's own options clears them without editing a single byte.
       "includes": ["src/ui/**", "!src/ui/index.js", "src/utils.jsx"],
       "linter": {
         "rules": {
-          "correctness": { "useUniqueElementIds": "off" },
           "nursery": { "useSortedClasses": "off" },
           "suspicious": { "noShadow": "off" }
         }
