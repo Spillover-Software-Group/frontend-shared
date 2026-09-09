@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { WandSparklesIcon } from "lucide-react";
@@ -20,6 +21,8 @@ function GenerateCaption({ onOptionSelected }) {
     formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
+  const contextId = useId();
+
   const onSubmit = ({ context }) =>
     generateAIReply("post_caption", context, { n: 3 });
 
@@ -31,9 +34,12 @@ function GenerateCaption({ onOptionSelected }) {
       className="flex flex-col gap-4 py-2 px-4 w-full box-border"
     >
       <div className="w-full flex flex-col gap-1">
-        <label className="text-sm text-gray-700">Give us some context...</label>
+        <label className="text-sm text-gray-700" htmlFor={contextId}>
+          Give us some context...
+        </label>
         <div className="w-full flex flex-col gap-4">
           <textarea
+            id={contextId}
             className="box-border w-full h-20 border border-gray-300 rounded-md p-2"
             {...register("context")}
             // biome-ignore lint/a11y/noAutofocus: intentional

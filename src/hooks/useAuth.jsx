@@ -39,7 +39,7 @@ class TokenData {
   }
 
   get expiresIn() {
-    return this.expiresAt - new Date();
+    return this.expiresAt - Date.now();
   }
 
   get isExpired() {

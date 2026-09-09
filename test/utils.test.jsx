@@ -7,6 +7,10 @@ import { a11yClickProps } from "@/components/ui/utils";
 // the tabIndex that make that element reachable and operable by keyboard.
 function Target({ onActivate }) {
   return (
+    // A <button> would carry the click and key handling natively, which is the behaviour under
+    // test here. The point of these props is the plain element that has none of it, so the
+    // fixture has to be one.
+    // biome-ignore lint/a11y/useSemanticElements: see above
     <div role="button" tabIndex={0} {...a11yClickProps(onActivate)}>
       Publish
     </div>
