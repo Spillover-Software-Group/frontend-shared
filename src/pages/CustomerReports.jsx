@@ -78,9 +78,9 @@ export function CustomerReports({
     );
 
   return (
-    <div className="sfs-customer-reports w-full h-full flex flex-col gap-8">
-      <div className="sfs-customer-reports__header flex flex-row justify-between items-center">
-        <div className="sfs-customer-reports__left flex flex-row gap-4 items-center">
+    <div className="sfs-customer-reports flex h-full w-full flex-col gap-8">
+      <div className="sfs-customer-reports__header flex flex-row items-center justify-between">
+        <div className="sfs-customer-reports__left flex flex-row items-center gap-4">
           {showBusinessSelect && (
             <BusinessSelect {...businessSelectProps} ariaLabel="Business" />
           )}
@@ -108,7 +108,7 @@ export function CustomerReports({
           </div>
         </div>
 
-        <div className="sfs-customer-reports__right flex flex-row gap-4 items-center">
+        <div className="sfs-customer-reports__right flex flex-row items-center gap-4">
           <ExportButton
             isDisabled={!business || !dateRange}
             business={business}
@@ -127,7 +127,7 @@ export function CustomerReports({
           <iframe
             title="Reports"
             src={reportsEmbedUrl}
-            className="sfs-customer-reports__iframe w-full h-[calc(100%_-_50px)] border-0"
+            className="sfs-customer-reports__iframe h-[calc(100%_-_50px)] w-full border-0"
           />
         ) : (
           <LoadingSpinner />
