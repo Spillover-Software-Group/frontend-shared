@@ -3,8 +3,15 @@
 Shared React component library (`@spillover/frontend-shared`), consumed as a git dependency by
 `accounts/src/frontend`, `engage/src/front_end_v6` and `senalysis/src/app`. `dist/` is committed:
 a change reaches consumers only after `npm run build`, a commit of `dist/`, and a lockfile bump in
-each consumer. About two dozen components are also forked into
-`engage/src/front_end_v6/src/components/ui/`; a fix there is applied in both places.
+each consumer.
+
+`src/ui/` bar its `index.js`, plus `src/utils.jsx`, is forked into
+`engage/src/front_end_v6/src/components/ui/` (`utils.jsx` sits at the top of `src/` here and inside
+`components/ui/` there). The copy is meant to be byte-for-byte, so `diff` between the two
+directories is the entire drift check, and a fix to a shared component is made here and copied
+across rather than written twice. Only two kinds of difference are expected in that diff: the
+import specifier for `utils`, which has a different path on each side, and a component engage has
+deliberately diverged. Anything else is drift.
 
 ## Scripts
 
@@ -14,7 +21,32 @@ each consumer. About two dozen components are also forked into
   Biome, `--error-on-warnings`) and `npm test` (Vitest, single run); `npm run fix` is the writing
   variant and is never used to verify. Biome is configured in `biome.jsonc`, the filename the rest
   of the monorepo uses, and `check` skips `dist/` because that is committed build output rather
-  than source.
+  than source. `check` also runs knip, which is why it can fail with nothing wrong in any file.
+
+## Linting
+
+The rule set is the platform's, with three things specific to this package.
+
+**The size ceilings come from this package's own distribution, not from an application's.** A
+component library is small by construction; the numbers in `biome.jsonc` sit a step above the
+longest function, longest file and highest complexity that exist here, and the comment beside them
+records what was measured. Re-measure before raising one.
+
+**No rule that rewrites a forked file is enabled.** Sorting imports and sorting Tailwind classes
+would both reorder the upstream half of a fork pair and put it out of step with engage, where
+nobody is diffing. Engage switches the same rules off for its copy and says so. They come back on
+in both repos in one coordinated change or in neither, so do not turn one on here alone, and do not
+"fix" a finding in `src/ui/` that only engage's config is currently hiding.
+
+**Before reaching for a suppression, check the rule's options.** Every `useUniqueElementIds`
+finding in this package was a React Aria collection key rather than a DOM id, and the rule has an
+`excludedComponents` option that says so precisely. Naming the components cleared 52 findings
+without editing a byte, where a baseline would have hidden them and a fix would have broken the
+fork.
+
+`tsconfig.json` exists so Biome can resolve the `@/` aliases; it is the only place Biome reads them
+from, and it mirrors `vite.config.js`. No TypeScript is introduced: `allowJs` on, `checkJs` off.
+Add an alias to both files or to neither.
 
 ## Testing
 
