@@ -50,9 +50,26 @@ describe("PresetDateRangeSelector", () => {
 
     expect(onChange.mock.lastCall[0]).toBe("thisMonth");
   });
+
+  it("names the control with the aria-label it is given", () => {
+    render(
+      <PresetDateRangeSelector
+        aria-label="Report period"
+        selectedPreset="today"
+      />,
+    );
+
+    expect(
+      screen.getByRole("button", { name: /Report period/ }),
+    ).toBeInTheDocument();
+  });
 });
 
 describe("usePresetDateRangeSelector", () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it("reports the preset it is given on mount", () => {
     const onChange = vi.fn();
     render(<ReportPeriod defaultPreset="yesterday" onChange={onChange} />);
@@ -95,6 +112,16 @@ describe("usePresetDateRangeSelector", () => {
       start: todayDate.set({ day: 1 }),
       end: todayDate,
     });
+  });
+
+  it("resolves the previous week to the Sunday through Saturday before this week", () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date(2026, 4, 27, 12));
+    const onChange = vi.fn();
+    render(<ReportPeriod defaultPreset="previousWeek" onChange={onChange} />);
+
+    expect(lastRange(onChange).start.toString()).toBe("2026-05-17");
+    expect(lastRange(onChange).end.toString()).toBe("2026-05-23");
   });
 
   it("resolves the previous month to that whole month", () => {
