@@ -33060,18 +33060,31 @@ const lT = Et({
     }
   }
 }), cT = Et({
-  base: "w-full max-w-md max-h-full rounded-2xl bg-white dark:bg-zinc-800/70 dark:backdrop-saturate-200 forced-colors:bg-[Canvas] text-left align-middle text-slate-700 dark:text-zinc-300 shadow-2xl bg-clip-padding border border-black/10 dark:border-white/10",
+  base: "w-full max-h-full rounded-2xl bg-white dark:bg-zinc-800/70 dark:backdrop-saturate-200 forced-colors:bg-[Canvas] text-left align-middle text-slate-700 dark:text-zinc-300 shadow-2xl bg-clip-padding border border-black/10 dark:border-white/10",
   variants: {
+    size: {
+      md: "max-w-md",
+      "4xl": "max-w-4xl"
+    },
     isEntering: {
       true: "animate-in zoom-in-105 ease-out duration-200"
     },
     isExiting: {
       true: "animate-out zoom-out-95 ease-in duration-200"
     }
+  },
+  defaultVariants: {
+    size: "md"
   }
 });
-function dT(e) {
-  return /* @__PURE__ */ O(l$, { ...e, className: lT, children: /* @__PURE__ */ O(Lk, { ...e, className: cT }) });
+function dT({ size: e, ...t }) {
+  return /* @__PURE__ */ O(l$, { ...t, className: lT, children: /* @__PURE__ */ O(
+    Lk,
+    {
+      ...t,
+      className: (r) => cT({ ...r, size: e })
+    }
+  ) });
 }
 function fT(e) {
   return /* @__PURE__ */ O(
