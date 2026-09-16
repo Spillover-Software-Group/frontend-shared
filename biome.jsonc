@@ -149,9 +149,9 @@
       // a synchronised lint pass. Off with that reason beats a baseline, which would read as an
       // invitation to fix them one file at a time.
       //
-      // `useUniqueElementIds`, which `engage` also switches off here, is not in this list: every
-      // one of its findings in these files was a React Aria collection key, and naming those
-      // components in the rule's own options clears them without editing a single byte.
+      // `useUniqueElementIds` is not in this list: every one of its findings in these files was a
+      // React Aria collection key, and naming those components in the rule's own options clears
+      // them without editing a single byte.
       "includes": ["src/ui/**", "!src/ui/index.js", "src/utils.jsx"],
       "linter": {
         "rules": {
