@@ -15,7 +15,7 @@ import config from "@/config";
 
 const cache = new InMemoryCache();
 
-async function setupClient({ mode, ownerId }) {
+function setupClient({ mode, ownerId }) {
   const uri =
     mode === "development"
       ? config.accountsGraphqlDevEndpoint

@@ -47,7 +47,7 @@ function useGenerateAIReply() {
       }
 
       return data.generateAiReply.replies;
-    } catch (error) {
+    } catch {
       return null;
     }
   };

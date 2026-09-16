@@ -7,7 +7,7 @@ function Option({ option, type, onClick }) {
 
   return (
     <div
-      className={`p-3 bg-gray-100 rounded-md text-gray-600 hover:bg-gray-200 transition duration-200 text-sm ${onClick && "cursor-pointer"} whitespace-pre-line`}
+      className={`rounded-md bg-gray-100 p-3 text-gray-600 text-sm transition duration-200 hover:bg-gray-200 ${onClick && "cursor-pointer"} whitespace-pre-line`}
       {...a11yClickProps(handleClick)}
     >
       {option}

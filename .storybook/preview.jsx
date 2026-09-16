@@ -1,6 +1,6 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
 
-import '../src/styles.css';
+import "../src/styles.css";
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
@@ -9,17 +9,17 @@ const preview = {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {},
-    }
+    },
   },
 
   decorators: [
     withThemeByClassName({
       themes: {
         // nameOfTheme: 'classNameForTheme',
-        light: '',
-        dark: 'dark',
+        light: "",
+        dark: "dark",
       },
-      defaultTheme: 'light',
+      defaultTheme: "light",
     }),
   ],
 

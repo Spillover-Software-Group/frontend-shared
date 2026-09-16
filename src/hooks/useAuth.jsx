@@ -39,7 +39,7 @@ class TokenData {
   }
 
   get expiresIn() {
-    return this.expiresAt - new Date();
+    return this.expiresAt - Date.now();
   }
 
   get isExpired() {
@@ -232,7 +232,5 @@ function useProvideAuth({ mode, ownerId }) {
     reauth,
   };
 }
-
-export default useAuth;
 
 export { useAuth, AuthProvider, getAccessToken, refreshAccessToken };
