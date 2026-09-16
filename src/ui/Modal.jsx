@@ -14,8 +14,12 @@ const overlayStyles = tv({
 });
 
 const modalStyles = tv({
-  base: "w-full max-w-md max-h-full rounded-2xl bg-white dark:bg-zinc-800/70 dark:backdrop-saturate-200 forced-colors:bg-[Canvas] text-left align-middle text-slate-700 dark:text-zinc-300 shadow-2xl bg-clip-padding border border-black/10 dark:border-white/10",
+  base: "w-full max-h-full rounded-2xl bg-white dark:bg-zinc-800/70 dark:backdrop-saturate-200 forced-colors:bg-[Canvas] text-left align-middle text-slate-700 dark:text-zinc-300 shadow-2xl bg-clip-padding border border-black/10 dark:border-white/10",
   variants: {
+    size: {
+      md: "max-w-md",
+      "4xl": "max-w-4xl",
+    },
     isEntering: {
       true: "animate-in zoom-in-105 ease-out duration-200",
     },
@@ -23,12 +27,18 @@ const modalStyles = tv({
       true: "animate-out zoom-out-95 ease-in duration-200",
     },
   },
+  defaultVariants: {
+    size: "md",
+  },
 });
 
-export function Modal(props) {
+export function Modal({ size, ...props }) {
   return (
     <ModalOverlay {...props} className={overlayStyles}>
-      <RACModal {...props} className={modalStyles} />
+      <RACModal
+        {...props}
+        className={(renderProps) => modalStyles({ ...renderProps, size })}
+      />
     </ModalOverlay>
   );
 }
