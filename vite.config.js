@@ -48,6 +48,10 @@ export default defineConfig({
       formats: ["es"],
       // Force extension to .es
       fileName: () => "frontend-shared.es.js",
+      // Every consumer imports the stylesheet by name
+      // (`@spillover/frontend-shared/dist/style.css`), and the default is the
+      // package name, so the name is pinned here rather than in three repos.
+      cssFileName: "style",
     },
     rollupOptions: {
       external: ["react", "react-dom", "react/jsx-runtime"],
