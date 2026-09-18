@@ -32,6 +32,9 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./test/setup.js",
+    // Workers share one jsdom build and one transform pipeline in process,
+    // which separate processes cannot.
+    pool: "threads",
     // Tests live under test/ mirroring src/, never beside the components, so the
     // library build never has to exclude them. Stories are documentation, not tests.
     include: ["test/**/*.test.{js,jsx}"],
