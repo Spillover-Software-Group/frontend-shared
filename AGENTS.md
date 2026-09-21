@@ -23,6 +23,15 @@ deliberately diverged. Anything else is drift.
   of the monorepo uses, and `check` skips `dist/` because that is committed build output rather
   than source. `check` also runs knip, which is why it can fail with nothing wrong in any file.
 
+The Node this package develops on is pinned in `.node-version`, and `package.json` repeats it and
+the npm it ships with under `devEngines`, so `npm install`, `npm ci` and `npm run` stop with an
+`EBADDEVENGINES` error under anything else. `mise install` is the fix. The pin lives in
+`devEngines` rather than `engines` because the consuming apps install this package from git with
+`engine-strict` on, and they run three different Node majors: an exact `engines` here would make
+their installs refuse too. One gap to know about: an npm older than the pinned one has never heard
+of the field and installs in silence, so a Node installed outside your version manager gets no
+warning at all.
+
 ## Linting
 
 The rule set is the platform's, with three things specific to this package.

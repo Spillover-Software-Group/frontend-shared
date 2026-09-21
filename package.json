@@ -4,6 +4,7 @@
   "description": "Shared front-end code for Spillover projects",
   "private": true,
   "type": "module",
+  "packageManager": "npm@10.9.8",
   "module": "./dist/frontend-shared.es.js",
   "files": [
     "dist"
@@ -75,5 +76,17 @@
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-scoped-preflight": "^3.2.8",
     "zod": "^3.23.8"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "22.23.2",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": "10.9.8",
+      "onFail": "error"
+    }
   }
 }
